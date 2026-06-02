@@ -1,66 +1,70 @@
-import Image from "next/image";
-import styles from "./page.module.css";
+import { Box, Typography, Button } from '@mui/material';
+import Link from 'next/link';
 
-export default function Home() {
+export default function HomePage() {
   return (
-    <div className={styles.page}>
-      <main className={styles.main}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className={styles.intro}>
-          <h1>To get started, edit the page.tsx file.</h1>
-          <p>
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
-        </div>
-        <div className={styles.ctas}>
-          <a
-            className={styles.primary}
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className={styles.logo}
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className={styles.secondary}
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
-      </main>
-    </div>
+    <Box
+      sx={{
+        minHeight: '100vh',
+        backgroundColor: '#030010',
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'center',
+        textAlign: 'center',
+        px: 3,
+        gap: 3,
+      }}
+    >
+      <Typography
+        component="h1"
+        sx={{
+          fontFamily: 'var(--font-nunito)',
+          fontWeight: 900,
+          fontSize: { xs: '2.4rem', md: '4rem' },
+          color: '#ffffff',
+          lineHeight: 1.1,
+          letterSpacing: '-0.02em',
+        }}
+      >
+        Data Adventures
+      </Typography>
+
+      <Typography
+        sx={{
+          fontFamily: 'var(--font-dm-sans)',
+          fontSize: { xs: '1rem', md: '1.2rem' },
+          color: 'rgba(255,255,255,0.55)',
+          maxWidth: 480,
+          lineHeight: 1.6,
+        }}
+      >
+        Storybook adventures that make data concepts fun and accessible for young readers.
+      </Typography>
+
+      <Link href="/books/alex-data-twin">
+        <Button
+          disableElevation
+          sx={{
+            mt: 1,
+            backgroundColor: '#F97316',
+            color: '#ffffff',
+            fontFamily: 'var(--font-nunito)',
+            fontWeight: 700,
+            fontSize: '1rem',
+            px: 4,
+            py: 1.5,
+            borderRadius: '50px',
+            boxShadow: '0 0 24px rgba(249,115,22,0.4)',
+            '&:hover': {
+              backgroundColor: '#EA6F0F',
+              boxShadow: '0 0 36px rgba(249,115,22,0.6)',
+            },
+          }}
+        >
+          Explore Alex and the Data Twin →
+        </Button>
+      </Link>
+    </Box>
   );
 }
