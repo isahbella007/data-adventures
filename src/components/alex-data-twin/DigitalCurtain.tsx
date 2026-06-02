@@ -5,14 +5,23 @@ import { createPortal } from 'react-dom';
 import { Box } from '@mui/material';
 import gsap from 'gsap';
 
-// Periwinkle → cyan colour palette
 const COLORS = ['#c7d2fe', '#a5b4fc', '#818cf8', '#7dd3fc', '#38bdf8', '#bae6fd'];
-const FONT_SIZE = 15;
 const CHARS = '01';
 
 interface Props {
   active: boolean;
   onComplete: () => void;
+}
+
+interface Particle {
+  char: string;
+  fontSize: number;
+  color: string;
+  startX: number;
+  y: number;
+  speedMultiplier: number;
+  waveFrequency: number;
+  waveAmplitude: number;
 }
 
 export default function DigitalCurtain({ active, onComplete }: Props) {
@@ -30,55 +39,47 @@ export default function DigitalCurtain({ active, onComplete }: Props) {
     const W = canvas.width;
     const H = canvas.height;
 
-    const cols = Math.ceil(W / FONT_SIZE) + 2;
-    const rows = Math.ceil(H / FONT_SIZE) + 1;
-    const curtainWidth = W * 0.52;
+    // Kept the scattered particle count but prepared them for a slower journey
+    const particleCount = 400; 
+    const particles: Particle[] = Array.from({ length: particleCount }, () => {
+      return {
+        char: CHARS[Math.floor(Math.random() * 2)],
+        fontSize: Math.floor(Math.random() * 12) + 12,
+        color: COLORS[Math.floor(Math.random() * COLORS.length)],
+        // Stretched the starting distribution further right so they enter gradually
+        startX: W + Math.random() * (W * 1.5), 
+        y: Math.random() * H,
+        // LOWERED SPEEDS: Lower multipliers make them glide gently
+        speedMultiplier: 0.3 + Math.random() * 0.4, 
+        waveFrequency: 0.003 + Math.random() * 0.005, 
+        waveAmplitude: 20 + Math.random() * 20, 
+      };
+    });
 
-    // Pre-generate characters so they don't flicker each frame
-    const grid: string[][] = Array.from({ length: rows }, () =>
-      Array.from({ length: cols * 2 }, () => CHARS[Math.floor(Math.random() * 2)])
-    );
-
-    const state = { wave: 0, bgOpacity: 0 };
+    const state = { progress: 0, bgOpacity: 0 };
 
     let raf: number;
     function draw() {
       ctx.clearRect(0, 0, W, H);
 
-      // Cobalt / ultramarine background
       ctx.fillStyle = `rgba(12, 18, 100, ${state.bgOpacity})`;
       ctx.fillRect(0, 0, W, H);
 
-      if (state.bgOpacity < 0.02) {
-        raf = requestAnimationFrame(draw);
-        return;
-      }
+      // Increased total distance because the swarm is spread wider
+      const totalDistance = W * 3.0; 
 
-      ctx.font = `${FONT_SIZE}px monospace`;
+      particles.forEach((p) => {
+        const currentX = p.startX - (state.progress * totalDistance * p.speedMultiplier);
+        const currentY = p.y + Math.sin(currentX * p.waveFrequency) * p.waveAmplitude;
 
-      // leading edge travels from right (W) to off-left (-curtainWidth)
-      const totalTravel = W + curtainWidth;
-      const leadingEdge = W - state.wave * (totalTravel + curtainWidth * 0.3);
+        let alpha = 1;
+        if (currentX < W * 0.15) alpha = currentX / (W * 0.15); 
+        if (alpha < 0) alpha = 0;
 
-      grid.forEach((rowChars, ri) => {
-        // Stagger each row slightly so the front is diagonal (more organic)
-        const rowShift = ri * 1.6;
-        const rLeading = leadingEdge - rowShift;
-        const rTrailing = rLeading - curtainWidth;
-
-        for (let ci = 0; ci < cols; ci++) {
-          const x = ci * FONT_SIZE;
-          if (x > rLeading || x < rTrailing) continue;
-
-          const t = (rLeading - x) / curtainWidth; // 0 = leading, 1 = trailing
-          const alpha = Math.max(0, (1 - t * 1.35)) * 0.82 * state.bgOpacity;
-          if (alpha < 0.02) continue;
-
-          const colorIdx = Math.min(Math.floor(t * COLORS.length), COLORS.length - 1);
-          ctx.globalAlpha = alpha;
-          ctx.fillStyle = COLORS[colorIdx];
-          ctx.fillText(rowChars[ci], x, (ri + 1) * FONT_SIZE);
-        }
+        ctx.globalAlpha = alpha * Math.min(1, state.bgOpacity * 1.5);
+        ctx.font = `bold ${p.fontSize}px monospace`;
+        ctx.fillStyle = p.color;
+        ctx.fillText(p.char, currentX, currentY);
       });
 
       ctx.globalAlpha = 1;
@@ -86,7 +87,6 @@ export default function DigitalCurtain({ active, onComplete }: Props) {
     }
     raf = requestAnimationFrame(draw);
 
-    // GSAP timeline drives state values; canvas reads them each frame
     const tl = gsap.timeline({
       onComplete: () => {
         cancelAnimationFrame(raf);
@@ -94,9 +94,22 @@ export default function DigitalCurtain({ active, onComplete }: Props) {
       },
     });
 
-    tl.to(state, { bgOpacity: 0.96, duration: 0.28, ease: 'power2.out' })
-      .to(state, { wave: 1, duration: 2.1, ease: 'power1.inOut' }, '<0.05')
-      .to(state, { bgOpacity: 0, duration: 0.7, ease: 'power2.in' }, '-=0.55');
+    // SLOWED TIMELINE: Pushed durations up significantly
+    tl.to(state, { 
+        bgOpacity: 0.95, 
+        duration: 0.8, // Slower background fade-in
+        ease: 'power2.out' 
+      })
+      .to(state, { 
+        progress: 1, 
+        duration: 4.8, // Bumping from 2.5s to nearly 5 seconds for a lazy drift
+        ease: 'power1.inOut' 
+      }, '<0.1')
+      .to(state, { 
+        bgOpacity: 0, 
+        duration: 1.2, // Soft, gradual fade out at the end to reveal the mirror world
+        ease: 'power2.in' 
+      }, '-=1.4'); // Begins fading out while the trailing particles pass
 
     return () => {
       cancelAnimationFrame(raf);
@@ -107,7 +120,7 @@ export default function DigitalCurtain({ active, onComplete }: Props) {
   if (!active) return null;
 
   return createPortal(
-    <Box sx={{ position: 'fixed', inset: 0, zIndex: 100, pointerEvents: 'none' }}>
+    <Box sx={{ position: 'fixed', inset: 0, zIndex: 100, pointerEvents: active ? 'auto' : 'none' }}>
       <canvas
         ref={canvasRef}
         style={{ display: 'block', width: '100%', height: '100%' }}
