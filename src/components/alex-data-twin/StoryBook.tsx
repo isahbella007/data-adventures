@@ -7,11 +7,10 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import Scene1Kitchen from './Scene1Kitchen';
 import Scene2DataMirror from './Scene2DataMirror';
 import Scene3Warp from './Scene3Warp';
-import Scene4CyberTunnel from './Scene4CyberTunnel';
 import Scene5CTA from './Scene5CTA';
 import DigitalCurtain from './DigitalCurtain';
 
-const SCENES = 4;
+const SCENES = 3;
 
 export default function StoryBook() {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -266,13 +265,8 @@ export default function StoryBook() {
             </Box>
           </Box>
 
-          <Scene3Warp active={activeScene === 1} onAdvance={() => scrollToScene(2)} />
-          <Scene4CyberTunnel
-            active={activeScene === 2}
-            gameComplete={gameComplete}
-            onGameComplete={() => setGameComplete(true)}
-            onAdvance={() => scrollToScene(3)}
-          />
+          <Scene3Warp active={activeScene === 1} onAdvance={() => { setGameComplete(true); scrollToScene(2); }} />
+          
           <Scene5CTA unlocked={gameComplete} />
         </Box>
       </Box>

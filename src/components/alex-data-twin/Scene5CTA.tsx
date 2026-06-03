@@ -2,21 +2,86 @@
 
 import { useRef, useEffect } from 'react';
 import { Box, Typography, Button } from '@mui/material';
-import Image from 'next/image';
 import gsap from 'gsap';
 
-export default function Scene4CTA({ unlocked }: { unlocked: boolean }) {
+const CONFETTI_COLORS = ['#a855f7', '#22c55e', '#7dd3fc', '#f97316', '#fbbf24', '#ec4899'];
+
+export default function Scene5CTA({ unlocked }: { unlocked: boolean }) {
   const contentRef = useRef<HTMLDivElement>(null);
+  const canvasRef = useRef<HTMLCanvasElement>(null);
   const hasAnimated = useRef(false);
+  const rafRef = useRef<number | null>(null);
 
   useEffect(() => {
     if (unlocked && !hasAnimated.current) {
       hasAnimated.current = true;
-      gsap.fromTo(contentRef.current, { y: 36, opacity: 0 }, { y: 0, opacity: 1, duration: 0.75, ease: 'back.out(1.2)', delay: 0.2 });
+
+      gsap.fromTo(
+        contentRef.current,
+        { y: 36, opacity: 0 },
+        { y: 0, opacity: 1, duration: 0.75, ease: 'back.out(1.2)', delay: 0.2 }
+      );
+
+      const canvas = canvasRef.current;
+      if (!canvas) return;
+
+      const ctx = canvas.getContext('2d')!;
+      const W = (canvas.width = window.innerWidth);
+      const H = (canvas.height = window.innerHeight);
+
+      const particles = Array.from({ length: 120 }, () => ({
+        x: W / 2,
+        y: H / 2,
+        color: CONFETTI_COLORS[Math.floor(Math.random() * CONFETTI_COLORS.length)],
+        radius: Math.random() * 4 + 2,
+        vx: (Math.random() - 0.5) * 12,
+        vy: (Math.random() - 0.6) * 14,
+        gravity: 0.25,
+        opacity: 1,
+      }));
+
+      function draw() {
+        ctx.clearRect(0, 0, W, H);
+        let alive = false;
+
+        particles.forEach(p => {
+          p.x += p.vx;
+          p.y += p.vy;
+          p.vy += p.gravity;
+          p.opacity -= 0.012;
+
+          if (p.opacity > 0) {
+            alive = true;
+            ctx.globalAlpha = p.opacity;
+            ctx.beginPath();
+            ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+            ctx.fillStyle = p.color;
+            ctx.fill();
+          }
+        });
+
+        ctx.globalAlpha = 1;
+        if (alive) {
+          rafRef.current = requestAnimationFrame(draw);
+        } else {
+          ctx.clearRect(0, 0, W, H);
+        }
+      }
+
+      rafRef.current = requestAnimationFrame(draw);
     }
+
     if (!unlocked) {
       hasAnimated.current = false;
+      if (rafRef.current) {
+        cancelAnimationFrame(rafRef.current);
+        rafRef.current = null;
+      }
     }
+
+    return () => {
+      if (rafRef.current) cancelAnimationFrame(rafRef.current);
+    };
   }, [unlocked]);
 
   return (
@@ -27,110 +92,131 @@ export default function Scene4CTA({ unlocked }: { unlocked: boolean }) {
         position: 'relative',
         flexShrink: 0,
         overflow: 'hidden',
-        background: 'linear-gradient(135deg, #030010 0%, #001650 50%, #030010 100%)',
+        background: 'radial-gradient(circle at center, #1e1b4b 0%, #030010 100%)',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
       }}
     >
-      {/* CSS star field */}
-      <Box
-        sx={{
+      {/* Confetti canvas */}
+      <canvas
+        ref={canvasRef}
+        style={{
           position: 'absolute',
           inset: 0,
-          backgroundImage: 'radial-gradient(rgba(125,211,252,0.9) 1px, transparent 0), radial-gradient(rgba(125,211,252,0.5) 0.5px, transparent 0)',
-          backgroundSize: '80px 80px, 40px 40px',
-          backgroundPosition: '0 0, 20px 20px',
-          opacity: 0.18,
+          width: '100%',
+          height: '100%',
+          zIndex: 25,
           pointerEvents: 'none',
         }}
       />
 
-      {/* Blue glow orb */}
+      {/* CTA card */}
       <Box
+        ref={contentRef}
         sx={{
-          position: 'absolute',
-          width: 480,
-          height: 480,
-          borderRadius: '50%',
-          background: 'radial-gradient(circle, rgba(0,87,255,0.22) 0%, transparent 70%)',
-          top: '50%',
-          left: '50%',
-          transform: 'translate(-50%, -50%)',
-          pointerEvents: 'none',
+          position: 'relative',
+          zIndex: 20,
+          textAlign: 'center',
+          maxWidth: 650,
+          px: { xs: 3, md: 5 },
+          py: 5,
+          opacity: 0,
         }}
-      />
-
-      <Box ref={contentRef} sx={{ position: 'relative', zIndex: 2, textAlign: 'center', px: 4, maxWidth: 600, opacity: unlocked ? 1 : 0.4 }}>
+      >
         {unlocked ? (
           <>
-            <Typography sx={{ fontSize: '3rem', mb: 1.5 }}>🏆</Typography>
             <Typography
-              variant="h2"
               sx={{
                 fontFamily: 'var(--font-nunito)',
-                fontWeight: 900,
-                fontSize: { xs: '1.7rem', md: '2.4rem' },
-                color: '#fff',
-                mb: 1.5,
-                lineHeight: 1.2,
+                color: '#a855f7',
+                fontWeight: 700,
+                fontSize: '14px',
+                textTransform: 'uppercase',
+                letterSpacing: '2px',
+                mb: '10px',
               }}
             >
-              You've mastered the first rule!
-            </Typography>
-            <Typography sx={{ fontFamily: 'var(--font-dm-sans)', fontWeight: 400, fontSize: { xs: '0.92rem', md: '1rem' }, color: 'rgba(255,255,255,0.72)', mb: 0.5, lineHeight: 1.6 }}>
-              But the Data Pirates' fortress lies ahead...
-            </Typography>
-            <Typography sx={{ fontFamily: 'var(--font-nunito)', fontWeight: 700, fontSize: { xs: '0.92rem', md: '1.05rem' }, color: '#7DD3FC', mb: 3.5, lineHeight: 1.5 }}>
-              "To crack their codes and rescue D-Teddy, we need the Official Field Guide!"
+              ✨ The Shield Activates!
             </Typography>
 
-            {/* Book mockup */}
-            <Box
+            <Typography
               sx={{
-                width: 110,
-                height: 148,
-                mx: 'auto',
-                mb: 3.5,
-                borderRadius: '8px',
-                background: 'linear-gradient(135deg, #001650 0%, #0057FF 100%)',
-                border: '2px solid rgba(125,211,252,0.5)',
-                boxShadow: '0 0 40px rgba(0,87,255,0.45), 0 12px 40px rgba(0,0,0,0.5)',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                position: 'relative',
-              }}
-            >
-              <Box sx={{ position: 'relative', width: 56, height: 56 }}>
-                <Image src="/images/logo.png" alt="D-Teddy" fill style={{ objectFit: 'contain' }} />
-              </Box>
-            </Box>
-
-            <Button
-              variant="contained"
-              disableElevation
-              href="#"
-              sx={{
-                backgroundColor: '#F97316',
-                color: '#fff',
                 fontFamily: 'var(--font-nunito)',
+                fontSize: 'clamp(36px, 6vw, 52px)',
+                lineHeight: 1.1,
                 fontWeight: 800,
-                fontSize: { xs: '1rem', md: '1.08rem' },
-                px: 5,
-                py: 1.8,
-                borderRadius: '50px',
-                animation: 'ctaPulse 2.5s ease-in-out infinite',
-                '@keyframes ctaPulse': {
-                  '0%,100%': { boxShadow: '0 0 28px rgba(249,115,22,0.55), 0 8px 32px rgba(249,115,22,0.3)' },
-                  '50%': { boxShadow: '0 0 48px rgba(249,115,22,0.85), 0 8px 48px rgba(249,115,22,0.5)' },
-                },
-                '&:hover': { backgroundColor: '#EA6F0F', transform: 'scale(1.05)' },
-                transition: 'background-color 0.2s, transform 0.2s',
+                color: '#fff',
+                mb: '16px',
               }}
             >
-              Get the Official Field Guide! 📖
-            </Button>
+              Will Alex & DigiAlex
+              <br />
+              <Box
+                component="span"
+                sx={{
+                  background: 'linear-gradient(to right, #7dd3fc, #c084fc)',
+                  WebkitBackgroundClip: 'text',
+                  WebkitTextFillColor: 'transparent',
+                }}
+              >
+                save D-Teddy?
+              </Box>
+            </Typography>
+
+            <Typography
+              sx={{
+                fontFamily: 'var(--font-nunito)',
+                color: '#94a3b8',
+                fontSize: { xs: '0.95rem', md: '18px' },
+                lineHeight: 1.6,
+                mb: '30px',
+              }}
+            >
+              A magical adventure story where children discover real digital world safety lessons — through playful code swarms, data meshes, and one very important teddy bear.
+            </Typography>
+
+            <Box sx={{ display: 'flex', gap: 2, justifyContent: 'center', flexWrap: 'wrap' }}>
+              <Button
+                variant="contained"
+                disableElevation
+                href="#"
+                sx={{
+                  background: 'linear-gradient(135deg, #6d28d9, #a855f7)',
+                  color: '#fff',
+                  fontFamily: 'var(--font-nunito)',
+                  fontSize: '16px',
+                  fontWeight: 700,
+                  px: '36px',
+                  py: '14px',
+                  borderRadius: '30px',
+                  boxShadow: '0 4px 20px rgba(139,92,246,0.4)',
+                  '&:hover': { opacity: 0.9, transform: 'scale(1.03)' },
+                  transition: 'all 0.2s',
+                }}
+              >
+                🚀 Get the Physical Book
+              </Button>
+              <Button
+                variant="outlined"
+                href="#"
+                sx={{
+                  background: 'rgba(255,255,255,0.05)',
+                  color: '#fff',
+                  fontFamily: 'var(--font-nunito)',
+                  fontSize: '16px',
+                  fontWeight: 700,
+                  px: '36px',
+                  py: '14px',
+                  borderRadius: '30px',
+                  border: '1px solid rgba(255,255,255,0.15)',
+                  '&:hover': { background: 'rgba(255,255,255,0.1)', borderColor: 'rgba(255,255,255,0.3)' },
+                  transition: 'all 0.2s',
+                }}
+              >
+                📖 Read a Free Preview
+              </Button>
+            </Box>
           </>
         ) : (
           <>
@@ -138,8 +224,8 @@ export default function Scene4CTA({ unlocked }: { unlocked: boolean }) {
             <Typography sx={{ fontFamily: 'var(--font-nunito)', fontWeight: 800, fontSize: { xs: '1.2rem', md: '1.45rem' }, color: 'rgba(255,255,255,0.45)', mb: 1 }}>
               The fortress awaits...
             </Typography>
-            <Typography sx={{ fontFamily: 'var(--font-dm-sans)', fontWeight: 400, fontSize: { xs: '0.82rem', md: '0.88rem' }, color: 'rgba(255,255,255,0.3)' }}>
-              Complete the Rules of the Realm to unlock this chapter.
+            <Typography sx={{ fontFamily: 'var(--font-nunito)', fontWeight: 400, fontSize: { xs: '0.82rem', md: '0.88rem' }, color: 'rgba(255,255,255,0.3)' }}>
+              Complete the consent game to unlock this chapter.
             </Typography>
           </>
         )}
