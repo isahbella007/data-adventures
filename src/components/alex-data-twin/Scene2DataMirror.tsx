@@ -9,9 +9,10 @@ interface Props {
   active: boolean;
   onDive: () => void;
   onStay: () => void;
+  sx?: any;
 }
 
-export default function Scene2DataMirror({ active, onDive, onStay }: Props) {
+export default function Scene2DataMirror({ active, onDive, onStay, sx }: Props) {
   const bubble1Ref = useRef<HTMLDivElement>(null);
   const bubble2Ref = useRef<HTMLDivElement>(null);
   const buttonsRef = useRef<HTMLDivElement>(null);
@@ -33,7 +34,16 @@ export default function Scene2DataMirror({ active, onDive, onStay }: Props) {
   }, [active]);
 
   return (
-    <Box sx={{ width: '100vw', height: '100vh', position: 'relative', flexShrink: 0, overflow: 'hidden' }}>
+    <Box
+      sx={{
+        width: '100vw',
+        height: '100vh',
+        position: 'relative',
+        flexShrink: 0,
+        overflow: 'hidden',
+        ...sx,
+      }}
+    >
       <Image src="/images/kitchen-data-mirror.png" alt="The Data Mirror World" fill style={{ objectFit: 'cover' }} />
 
       <Box

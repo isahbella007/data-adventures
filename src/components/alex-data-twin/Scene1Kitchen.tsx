@@ -3,9 +3,23 @@
 import { Box, Typography } from '@mui/material';
 import Image from 'next/image';
 
-export default function Scene1Kitchen() {
+interface Scene1KitchenProps {
+  sx?: any;
+}
+
+export default function Scene1Kitchen({ sx }: Scene1KitchenProps) {
   return (
-    <Box sx={{ width: '100vw', height: '100vh', position: 'relative', flexShrink: 0, overflow: 'hidden' }}>
+    <Box
+      sx={{
+        width: '100vw',
+        height: '100vh',
+        position: 'relative',
+        flexShrink: 0,
+        overflow: 'hidden',
+        ...sx,
+      }}
+    >
+
       <Image
         src="/images/kitchen-real.png"
         alt="Alex in the kitchen"

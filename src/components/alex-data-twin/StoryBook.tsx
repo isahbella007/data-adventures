@@ -11,25 +11,34 @@ import Scene4CyberTunnel from './Scene4CyberTunnel';
 import Scene5CTA from './Scene5CTA';
 import DigitalCurtain from './DigitalCurtain';
 
-const SCENES = 5;
+const SCENES = 4;
 
 export default function StoryBook() {
   const containerRef = useRef<HTMLDivElement>(null);
   const stripRef = useRef<HTMLDivElement>(null);
   const stRef = useRef<ScrollTrigger | null>(null);
+  const kitchenRef = useRef<HTMLDivElement>(null);
+  const mirrorRef = useRef<HTMLDivElement>(null);
   const curtainFiredRef = useRef(false);
+  const curtainActiveRef = useRef(false);
+  const isJumpingRef = useRef(false);
+  const isMirrorActiveRef = useRef(false);
   const [activeScene, setActiveScene] = useState(0);
   const [gameComplete, setGameComplete] = useState(false);
   const [curtainActive, setCurtainActive] = useState(false);
-
-  // Keep a ref to the active scene to prevent stale closures in GSAP callbacks
+  const [isMirrorActive, setIsMirrorActive] = useState(false);
   const activeSceneRef = useRef(0);
-  useEffect(() => {
-    activeSceneRef.current = activeScene;
-  }, [activeScene]);
+
+  // Synchronous state and ref updater to eliminate frame lag
+  const updateActiveScene = useCallback((newScene: number) => {
+    setActiveScene(newScene);
+    activeSceneRef.current = newScene;
+  }, []);
 
   // Jump to a scene instantly (used under the curtain where the scroll is invisible)
   const jumpToScene = useCallback((index: number) => {
+    isJumpingRef.current = true;
+    updateActiveScene(index);
     const attempt = () => {
       const st = stRef.current;
       if (!st) {
@@ -38,19 +47,26 @@ export default function StoryBook() {
       }
       const progress = index / (SCENES - 1);
       window.scrollTo({ top: st.start + progress * (st.end - st.start) });
+      setTimeout(() => {
+        isJumpingRef.current = false;
+      }, 150);
     };
     attempt();
-  }, []);
+  }, [updateActiveScene]);
 
   // Stay / Return to Scene 1 transition (covers peak coverage timing)
   const handleStay = useCallback(() => {
     if (curtainFiredRef.current) return;
     curtainFiredRef.current = true;
+    curtainActiveRef.current = true;
     setCurtainActive(true);
     setTimeout(() => {
-      jumpToScene(0);
-    }, 600); // 600ms matches when DigitalCurtain is fully opaque
-  }, [jumpToScene]);
+      setIsMirrorActive(false);
+      isMirrorActiveRef.current = false;
+      gsap.to(kitchenRef.current, { opacity: 1, duration: 1.5, ease: 'power2.inOut' });
+      gsap.to(mirrorRef.current, { opacity: 0, duration: 1.5, ease: 'power2.inOut' });
+    }, 800);
+  }, []);
 
   useEffect(() => {
     gsap.registerPlugin(ScrollTrigger);
@@ -70,8 +86,13 @@ export default function StoryBook() {
           const progress = self.progress;
           const newScene = Math.min(Math.floor(progress * SCENES), SCENES - 1);
 
+          if (isJumpingRef.current || curtainActiveRef.current) {
+            updateActiveScene(newScene);
+            return;
+          }
+
           // Intercept manual scrolling forward from Scene 0 to Scene 1
-          if (activeSceneRef.current === 0 && progress > 0.005) {
+          if (activeSceneRef.current === 0 && !isMirrorActiveRef.current && progress > 0.002) {
             if (!curtainFiredRef.current) {
               fireCurtain();
               self.scroll(self.start);
@@ -79,16 +100,7 @@ export default function StoryBook() {
             return;
           }
 
-          // Intercept manual scrolling back from Scene 1 to Scene 0
-          if (activeSceneRef.current === 1 && progress < 0.205) {
-            if (!curtainFiredRef.current) {
-              handleStay();
-              self.scroll(self.start + 0.2 * (self.end - self.start));
-            }
-            return;
-          }
-
-          setActiveScene(newScene);
+          updateActiveScene(newScene);
         },
       };
       gsap.to(strip, { x: () => -(window.innerWidth * (SCENES - 1)), ease: 'none', scrollTrigger: stConfig });
@@ -99,7 +111,7 @@ export default function StoryBook() {
       stRef.current = null;
       ctx.revert();
     };
-  }, [handleStay]);
+  }, [handleStay, updateActiveScene]);
 
   // Smooth scroll for button-triggered navigation
   const scrollToScene = useCallback((index: number) => {
@@ -113,12 +125,16 @@ export default function StoryBook() {
   const fireCurtain = useCallback(() => {
     if (curtainFiredRef.current) return;
     curtainFiredRef.current = true;
+    curtainActiveRef.current = true;
     setCurtainActive(true);
-    // Scene 2 jumps into position invisibly under the curtain (at 600ms)
+    // Cross-fade the views under the curtain (at 800ms)
     setTimeout(() => {
-      jumpToScene(1);
-    }, 600);
-  }, [jumpToScene]);
+      setIsMirrorActive(true);
+      isMirrorActiveRef.current = true;
+      gsap.to(kitchenRef.current, { opacity: 0, duration: 1.5, ease: 'power2.inOut' });
+      gsap.to(mirrorRef.current, { opacity: 1, duration: 1.5, ease: 'power2.inOut' });
+    }, 800);
+  }, []);
 
   // Intercept all wheel and touch interaction on Scene 1 to run the curtain transition
   useEffect(() => {
@@ -178,6 +194,7 @@ export default function StoryBook() {
 
   const handleCurtainComplete = useCallback(() => {
     setCurtainActive(false);
+    curtainActiveRef.current = false;
     curtainFiredRef.current = false;
   }, []);
 
@@ -190,18 +207,68 @@ export default function StoryBook() {
           ref={stripRef}
           sx={{ display: 'flex', width: `${SCENES * 100}vw`, height: '100%', willChange: 'transform' }}
         >
-          <Scene1Kitchen />
-          <Scene2DataMirror
-            active={activeScene === 1}
-            onDive={() => scrollToScene(2)}
-            onStay={handleStay}
-          />
-          <Scene3Warp active={activeScene === 2} onAdvance={() => scrollToScene(3)} />
+          {/* Slide 0: Kitchen & Data Mirror stacked in-place */}
+          <Box sx={{ width: '100vw', height: '100vh', position: 'relative', flexShrink: 0, overflow: 'hidden' }}>
+            {/* Status Badge */}
+            <Box
+              sx={{
+                position: 'absolute',
+                top: 90,
+                left: '50%',
+                transform: 'translateX(-50%)',
+                background: !isMirrorActive ? 'rgba(255, 255, 255, 0.8)' : 'rgba(13, 148, 136, 0.2)',
+                border: !isMirrorActive ? 'none' : '1px solid rgba(45, 212, 191, 0.4)',
+                color: !isMirrorActive ? '#7c3aed' : '#2dd4bf',
+                fontFamily: 'var(--font-nunito)',
+                fontWeight: 700,
+                fontSize: 13,
+                px: 2,
+                py: 0.75,
+                borderRadius: '20px',
+                boxShadow: '0 4px 12px rgba(0,0,0,0.08)',
+                zIndex: 30,
+                letterSpacing: '0.5px',
+                transition: 'all 1s ease',
+              }}
+            >
+              {!isMirrorActive ? "Watching closely..." : "Inside the Data World 🌐"}
+            </Box>
+
+            <Box
+              ref={kitchenRef}
+              sx={{
+                position: 'absolute',
+                inset: 0,
+                zIndex: 10,
+                willChange: 'opacity',
+              }}
+            >
+              <Scene1Kitchen />
+            </Box>
+            <Box
+              ref={mirrorRef}
+              sx={{
+                position: 'absolute',
+                inset: 0,
+                zIndex: 5,
+                opacity: 0,
+                willChange: 'opacity',
+              }}
+            >
+              <Scene2DataMirror
+                active={isMirrorActive}
+                onDive={() => scrollToScene(1)}
+                onStay={handleStay}
+              />
+            </Box>
+          </Box>
+
+          <Scene3Warp active={activeScene === 1} onAdvance={() => scrollToScene(2)} />
           <Scene4CyberTunnel
-            active={activeScene === 3}
+            active={activeScene === 2}
             gameComplete={gameComplete}
             onGameComplete={() => setGameComplete(true)}
-            onAdvance={() => scrollToScene(4)}
+            onAdvance={() => scrollToScene(3)}
           />
           <Scene5CTA unlocked={gameComplete} />
         </Box>

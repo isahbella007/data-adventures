@@ -1,6 +1,6 @@
 'use client';
 
-import { useRef, useEffect } from 'react';
+import { useRef, useEffect, useState } from 'react';
 import { createPortal } from 'react-dom';
 import { Box } from '@mui/material';
 import gsap from 'gsap';
@@ -26,6 +26,11 @@ interface Particle {
 
 export default function DigitalCurtain({ active, onComplete }: Props) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   useEffect(() => {
     if (!active) return;
@@ -117,7 +122,7 @@ export default function DigitalCurtain({ active, onComplete }: Props) {
     };
   }, [active, onComplete]);
 
-  if (!active) return null;
+  if (!mounted || !active) return null;
 
   return createPortal(
     <Box sx={{ position: 'fixed', inset: 0, zIndex: 100, pointerEvents: active ? 'auto' : 'none' }}>
