@@ -150,7 +150,7 @@ export default function Scene5CTA({ unlocked }: { unlocked: boolean }) {
                 mb: '16px',
               }}
             >
-              Will Alex & DigiAlex
+              Will Alex & DT
               <br />
               <Box
                 component="span"

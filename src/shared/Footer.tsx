@@ -7,7 +7,7 @@ import { usePathname } from 'next/navigation';
 export default function Footer() {
   const pathname = usePathname();
 
-  if (pathname === '/books/alex-data-twin') {
+  if (pathname === '/books/alex-data-twin' || pathname === '/') {
     return null;
   }
 
