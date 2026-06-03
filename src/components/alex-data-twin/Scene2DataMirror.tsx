@@ -8,28 +8,26 @@ import gsap from 'gsap';
 interface Props {
   active: boolean;
   onDive: () => void;
-  onStay: () => void;
   sx?: any;
 }
 
-export default function Scene2DataMirror({ active, onDive, onStay, sx }: Props) {
-  const bubble1Ref = useRef<HTMLDivElement>(null);
-  const bubble2Ref = useRef<HTMLDivElement>(null);
-  const buttonsRef = useRef<HTMLDivElement>(null);
+export default function Scene2DataMirror({ active, onDive, sx }: Props) {
+  const textRef = useRef<HTMLDivElement>(null);
+  const buttonRef = useRef<HTMLDivElement>(null);
   const hasAnimated = useRef(false);
 
   useEffect(() => {
     if (active && !hasAnimated.current) {
       hasAnimated.current = true;
       gsap.fromTo(
-        [bubble1Ref.current, bubble2Ref.current, buttonsRef.current],
+        [textRef.current, buttonRef.current],
         { y: 28, opacity: 0 },
         { y: 0, opacity: 1, duration: 0.55, stagger: 0.3, ease: 'back.out(1.4)', delay: 0.3 }
       );
     }
     if (!active) {
       hasAnimated.current = false;
-      gsap.set([bubble1Ref.current, bubble2Ref.current, buttonsRef.current], { y: 28, opacity: 0 });
+      gsap.set([textRef.current, buttonRef.current], { y: 28, opacity: 0 });
     }
   }, [active]);
 
@@ -46,84 +44,53 @@ export default function Scene2DataMirror({ active, onDive, onStay, sx }: Props) 
     >
       <Image src="/images/kitchen-data-mirror.png" alt="The Data Mirror World" fill style={{ objectFit: 'cover' }} />
 
+      {/* Story overlay */}
       <Box
         sx={{
           position: 'absolute',
           inset: 0,
-          background: 'linear-gradient(135deg, rgba(0,22,80,0.55) 0%, rgba(0,87,255,0.18) 50%, rgba(192,132,252,0.12) 100%)',
-          pointerEvents: 'none',
-        }}
-      />
-
-      <Box
-        sx={{
-          position: 'absolute',
-          inset: 0,
+          zIndex: 20,
           display: 'flex',
           flexDirection: 'column',
-          alignItems: 'center',
           justifyContent: 'flex-end',
-          pb: { xs: 6, md: 7 },
-          px: { xs: 3, md: 6 },
-          zIndex: 2,
+          padding: { xs: '40px 24px', md: '60px 40px' },
+          background: 'linear-gradient(to top, rgba(3,0,25,0.85) 0%, rgba(3,0,25,0) 50%)',
+          transition: 'background 1.5s ease',
         }}
       >
-        {/* Alex's bubble */}
-        <Box ref={bubble1Ref} sx={{ opacity: 0, mb: 2, maxWidth: 460, width: '100%', alignSelf: 'flex-start' }}>
-          <Box
+        {/* Text content */}
+        <Box ref={textRef} sx={{ opacity: 0, maxWidth: 600, mx: 'auto', textAlign: 'center', mb: '24px' }}>
+          <Typography
             sx={{
-              display: 'inline-block',
-              backgroundColor: 'rgba(255,248,238,0.93)',
-              borderRadius: '18px 18px 18px 4px',
-              px: 2.5,
-              py: 1.4,
-              boxShadow: '0 4px 20px rgba(0,0,0,0.25)',
-            }}
-          >
-            <Typography sx={{ fontFamily: 'var(--font-nunito)', fontWeight: 700, fontSize: { xs: '0.9rem', md: '1rem' }, color: '#030010' }}>
-              Alex: "Whoa... is that... me?!"
-            </Typography>
-          </Box>
-        </Box>
-
-        {/* Digital Alex's bubble */}
-        <Box ref={bubble2Ref} sx={{ opacity: 0, mb: 3.5, maxWidth: 520, width: '100%', alignSelf: 'flex-end' }}>
-          <Box
-            sx={{
-              display: 'inline-block',
-              backgroundColor: 'rgba(0,87,255,0.82)',
-              borderRadius: '18px 18px 4px 18px',
-              px: 2.5,
-              py: 1.4,
-              border: '1.5px solid rgba(125,211,252,0.45)',
-              boxShadow: '0 4px 24px rgba(0,87,255,0.4)',
-            }}
-          >
-            <Typography sx={{ fontFamily: 'var(--font-nunito)', fontWeight: 700, fontSize: { xs: '0.9rem', md: '1rem' }, color: '#fff' }}>
-              Digital Alex: "You made it! I'm your digital twin. I need your help — the Data Pirates took D-Teddy! 🧸"
-            </Typography>
-          </Box>
-        </Box>
-
-        {/* Choices */}
-        <Box ref={buttonsRef} sx={{ opacity: 0, display: 'flex', gap: 2, flexWrap: 'wrap', justifyContent: 'center' }}>
-          <Button
-            onClick={onStay}
-            variant="outlined"
-            sx={{
-              borderColor: 'rgba(125,211,252,0.35)',
-              color: 'rgba(255,255,255,0.55)',
               fontFamily: 'var(--font-nunito)',
-              fontWeight: 700,
-              fontSize: { xs: '0.8rem', md: '0.88rem' },
-              px: 3,
-              py: 1.2,
-              borderRadius: '50px',
-              '&:hover': { borderColor: '#7DD3FC', color: '#7DD3FC' },
+              fontSize: 'clamp(32px, 5vw, 54px)',
+              fontWeight: 800,
+              lineHeight: 1.1,
+              mb: '12px',
             }}
           >
-            Stay in the Boring Kitchen
-          </Button>
+            <Box component="span" sx={{ color: '#7dd3fc', textShadow: '0 0 20px rgba(125,211,252,0.3)', display: 'block' }}>
+              Welcome to the
+            </Box>
+            <Box component="span" sx={{ color: '#fff', display: 'block' }}>
+              Data World
+            </Box>
+          </Typography>
+          <Typography
+            sx={{
+              fontFamily: 'var(--font-nunito)',
+              fontSize: 'clamp(15px, 2.5vw, 19px)',
+              color: '#C2CCDA',
+              fontWeight: 600,
+              lineHeight: 1.6,
+            }}
+          >
+            Alex steps through — and everything turns electric blue. He meets his twin, DigiAlex, who reveals a shocking missing-person mystery.
+          </Typography>
+        </Box>
+
+        {/* CTA button */}
+        <Box ref={buttonRef} sx={{ opacity: 0, textAlign: 'center' }}>
           <Button
             onClick={onDive}
             variant="contained"

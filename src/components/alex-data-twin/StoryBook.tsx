@@ -144,9 +144,11 @@ export default function StoryBook() {
 
     const handleWheel = (e: WheelEvent) => {
       e.preventDefault();
-      if (e.deltaY > 0) {
-        fireCurtain();
+      if (isMirrorActiveRef.current) {
+        if (e.deltaY > 0) scrollToScene(1);
+        return;
       }
+      if (e.deltaY > 0) fireCurtain();
     };
 
     const handleTouchStart = (e: TouchEvent) => {
@@ -156,10 +158,12 @@ export default function StoryBook() {
     const handleTouchMove = (e: TouchEvent) => {
       e.preventDefault();
       const touchEndY = e.touches[0].clientY;
-      const deltaY = touchStartY - touchEndY; // swipe up / scroll down
-      if (deltaY > 30) {
-        fireCurtain();
+      const deltaY = touchStartY - touchEndY;
+      if (isMirrorActiveRef.current) {
+        if (deltaY > 30) scrollToScene(1);
+        return;
       }
+      if (deltaY > 30) fireCurtain();
     };
 
     window.addEventListener('wheel', handleWheel, { passive: false });
@@ -171,14 +175,14 @@ export default function StoryBook() {
       window.removeEventListener('touchstart', handleTouchStart);
       window.removeEventListener('touchmove', handleTouchMove);
     };
-  }, [activeScene, fireCurtain]);
+  }, [activeScene, fireCurtain, scrollToScene]);
 
-  // Auto-trigger curtain on Scene 1 after 3s
+  // Auto-trigger curtain on Scene 1 after 3s (only when kitchen is showing, not mirror)
   useEffect(() => {
-    if (activeScene !== 0) return;
+    if (activeScene !== 0 || isMirrorActive) return;
     const timer = setTimeout(fireCurtain, 3000);
     return () => clearTimeout(timer);
-  }, [activeScene, fireCurtain]);
+  }, [activeScene, fireCurtain, isMirrorActive]);
 
   // Block scroll events globally while the curtain animation is active
   useEffect(() => {
@@ -258,7 +262,6 @@ export default function StoryBook() {
               <Scene2DataMirror
                 active={isMirrorActive}
                 onDive={() => scrollToScene(1)}
-                onStay={handleStay}
               />
             </Box>
           </Box>

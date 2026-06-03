@@ -28,39 +28,51 @@ export default function Scene1Kitchen({ sx }: Scene1KitchenProps) {
         priority
       />
 
-      {/* Legibility gradient at the bottom */}
+      {/* Story overlay */}
       <Box
         sx={{
           position: 'absolute',
           inset: 0,
-          background: 'linear-gradient(to top, rgba(61,26,0,0.65) 0%, transparent 55%)',
-          pointerEvents: 'none',
-        }}
-      />
-
-      <Box
-        sx={{
-          position: 'absolute',
-          bottom: { xs: 60, md: 48 },
-          left: 0,
-          right: 0,
-          textAlign: 'center',
-          zIndex: 2,
-          px: 3,
+          zIndex: 20,
+          display: 'flex',
+          flexDirection: 'column',
+          justifyContent: 'flex-end',
+          padding: { xs: '40px 24px', md: '60px 40px' },
+          background: 'linear-gradient(to top, rgba(255,255,255,0.75) 0%, rgba(255,255,255,0) 40%)',
+          transition: 'background 1.5s ease',
         }}
       >
-        <Typography
-          sx={{
-            fontFamily: 'var(--font-nunito)',
-            fontWeight: 800,
-            fontSize: { xs: '1.05rem', md: '1.35rem' },
-            color: '#FFF8EE',
-            textShadow: '0 2px 12px rgba(0,0,0,0.5)',
-          }}
-        >
-          One ordinary morning, Alex noticed something strange on the kitchen table...
-        </Typography>
+        <Box sx={{ maxWidth: 600, mx: 'auto', textAlign: 'center', mb: '24px' }}>
+          <Typography
+            sx={{
+              fontFamily: 'var(--font-nunito)',
+              fontSize: 'clamp(32px, 5vw, 54px)',
+              fontWeight: 800,
+              lineHeight: 1.1,
+              mb: '12px',
+            }}
+          >
+            <Box component="span" sx={{ color: '#1c0a00', display: 'block' }}>
+              Alex & His
+            </Box>
+            <Box component="span" sx={{ color: '#7c3aed', display: 'block' }}>
+              Digital Twin
+            </Box>
+          </Typography>
+          <Typography
+            sx={{
+              fontFamily: 'var(--font-nunito)',
+              fontSize: 'clamp(15px, 2.5vw, 19px)',
+              color: '#4a2e1b',
+              fontWeight: 600,
+              lineHeight: 1.6,
+            }}
+          >
+            One day Alex looks into Mum's tablet and sees a reflection staring back — except it isn't just a reflection. It's him. But different. And it wants to talk.
+          </Typography>
+        </Box>
       </Box>
+
     </Box>
   );
 }
