@@ -206,14 +206,14 @@ export default function ShirleyPage() {
             </Box>
           </Box>
 
-          {/* Right — Photo (transparent PNG cutout, floats on the grid) */}
+          {/* Right — Photo (hidden on mobile, transparent PNG cutout on desktop) */}
           <Box
             ref={heroImgRef}
             sx={{
+              display: { xs: 'none', md: 'flex' },
               width: '100%',
-              height: { xs: 420, md: 580 },
+              height: 580,
               position: 'relative',
-              display: 'flex',
               alignItems: 'flex-end',
               justifyContent: 'center',
             }}
@@ -451,25 +451,49 @@ export default function ShirleyPage() {
             alignItems: 'center',
           }}
         >
-          {/* Photo */}
+          {/* Photo — circular avatar with glowing ring */}
           <Box
             sx={{
-              flex: '0.75',
-              width: '100%',
-              height: { xs: 380, md: 500 },
-              borderRadius: '20px',
-              overflow: 'hidden',
-              position: 'relative',
               flexShrink: 0,
-              boxShadow: '0 0 0 1px rgba(167,139,250,0.15), 0 20px 60px rgba(0,0,0,0.5)',
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center',
+              gap: '16px',
             }}
           >
-            <Image
-              src="/images/creators/shirley.jpg"
-              alt="Shirley Werchota"
-              fill
-              style={{ objectFit: 'cover', objectPosition: 'center top' }}
-            />
+            <Box
+              sx={{
+                width: { xs: 200, md: 260 },
+                height: { xs: 200, md: 260 },
+                borderRadius: '50%',
+                overflow: 'hidden',
+                position: 'relative',
+                boxShadow: '0 0 0 3px rgba(167,139,250,0.25), 0 0 40px rgba(109,40,217,0.4), 0 0 80px rgba(109,40,217,0.15)',
+                flexShrink: 0,
+              }}
+            >
+              <Image
+                src="/images/creators/shirley2.png"
+                alt="Shirley Werchota"
+                fill
+                style={{
+                  objectFit: 'cover',
+                  objectPosition: 'center center',
+                  filter: 'drop-shadow(0 0 20px rgba(167,139,250,0.4))',
+                  maskImage: 'linear-gradient(to bottom, black 80%, transparent 100%)',
+                  WebkitMaskImage: 'linear-gradient(to bottom, black 80%, transparent 100%)',
+                }}
+              />
+            </Box>
+            {/* Name plate under avatar */}
+            <Box sx={{ textAlign: 'center' }}>
+              <Typography sx={{ fontFamily: 'var(--font-nunito)', fontWeight: 800, fontSize: '18px', color: '#fff' }}>
+                Shirley Werchota
+              </Typography>
+              <Typography sx={{ fontFamily: 'var(--font-inter)', fontSize: '12px', color: 'rgba(167,139,250,0.7)', letterSpacing: '1.5px', textTransform: 'uppercase', mt: '4px' }}>
+                CDO & Author
+              </Typography>
+            </Box>
           </Box>
 
           {/* Bio */}
@@ -489,7 +513,7 @@ export default function ShirleyPage() {
               About Shirley
             </Typography>
 
-            <Typography
+            {/* <Typography
               sx={{
                 fontFamily: 'var(--font-playfair)',
                 fontSize: { xs: '36px', md: '52px' },
@@ -501,7 +525,7 @@ export default function ShirleyPage() {
               }}
             >
               CDO.<br />Author.<br />Data Advocate.
-            </Typography>
+            </Typography> */}
 
             <Typography
               sx={{ fontFamily: 'var(--font-inter)', fontSize: '16px', lineHeight: 1.75, color: 'rgba(255,255,255,0.6)', mb: '18px' }}
