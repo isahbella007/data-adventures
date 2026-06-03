@@ -69,7 +69,7 @@ export default function Scene2DataMirror({ active, onDive, sx }: Props) {
               mb: '12px',
             }}
           >
-            <Box component="span" sx={{ color: '#7dd3fc', textShadow: '0 0 20px rgba(125,211,252,0.3)', display: 'block' }}>
+            <Box component="span" sx={{ color: '#0ea5e9', textShadow: '0 0 20px rgba(14,165,233,0.3)', display: 'block' }}>
               Welcome to the
             </Box>
             <Box component="span" sx={{ color: '#fff', display: 'block' }}>
@@ -80,7 +80,7 @@ export default function Scene2DataMirror({ active, onDive, sx }: Props) {
             sx={{
               fontFamily: 'var(--font-nunito)',
               fontSize: 'clamp(15px, 2.5vw, 19px)',
-              color: '#C2CCDA',
+              color: '#dde2e9ff',
               fontWeight: 600,
               lineHeight: 1.6,
             }}

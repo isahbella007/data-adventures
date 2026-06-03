@@ -12,72 +12,68 @@ export default function Scene5CTA({ unlocked }: { unlocked: boolean }) {
   const hasAnimated = useRef(false);
   const rafRef = useRef<number | null>(null);
 
+  // Always animate in on mount
   useEffect(() => {
-    if (unlocked && !hasAnimated.current) {
-      hasAnimated.current = true;
+    gsap.fromTo(
+      contentRef.current,
+      { y: 36, opacity: 0 },
+      { y: 0, opacity: 1, duration: 0.75, ease: 'back.out(1.2)', delay: 0.2 }
+    );
+  }, []);
 
-      gsap.fromTo(
-        contentRef.current,
-        { y: 36, opacity: 0 },
-        { y: 0, opacity: 1, duration: 0.75, ease: 'back.out(1.2)', delay: 0.2 }
-      );
+  // Confetti fires only when the game is completed
+  useEffect(() => {
+    if (!unlocked) return;
+    if (hasAnimated.current) return;
+    hasAnimated.current = true;
 
-      const canvas = canvasRef.current;
-      if (!canvas) return;
+    const canvas = canvasRef.current;
+    if (!canvas) return;
 
-      const ctx = canvas.getContext('2d')!;
-      const W = (canvas.width = window.innerWidth);
-      const H = (canvas.height = window.innerHeight);
+    const ctx = canvas.getContext('2d')!;
+    const W = (canvas.width = window.innerWidth);
+    const H = (canvas.height = window.innerHeight);
 
-      const particles = Array.from({ length: 120 }, () => ({
-        x: W / 2,
-        y: H / 2,
-        color: CONFETTI_COLORS[Math.floor(Math.random() * CONFETTI_COLORS.length)],
-        radius: Math.random() * 4 + 2,
-        vx: (Math.random() - 0.5) * 12,
-        vy: (Math.random() - 0.6) * 14,
-        gravity: 0.25,
-        opacity: 1,
-      }));
+    const particles = Array.from({ length: 120 }, () => ({
+      x: W / 2,
+      y: H / 2,
+      color: CONFETTI_COLORS[Math.floor(Math.random() * CONFETTI_COLORS.length)],
+      radius: Math.random() * 4 + 2,
+      vx: (Math.random() - 0.5) * 12,
+      vy: (Math.random() - 0.6) * 14,
+      gravity: 0.25,
+      opacity: 1,
+    }));
 
-      function draw() {
-        ctx.clearRect(0, 0, W, H);
-        let alive = false;
+    function draw() {
+      ctx.clearRect(0, 0, W, H);
+      let alive = false;
 
-        particles.forEach(p => {
-          p.x += p.vx;
-          p.y += p.vy;
-          p.vy += p.gravity;
-          p.opacity -= 0.012;
+      particles.forEach(p => {
+        p.x += p.vx;
+        p.y += p.vy;
+        p.vy += p.gravity;
+        p.opacity -= 0.012;
 
-          if (p.opacity > 0) {
-            alive = true;
-            ctx.globalAlpha = p.opacity;
-            ctx.beginPath();
-            ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
-            ctx.fillStyle = p.color;
-            ctx.fill();
-          }
-        });
-
-        ctx.globalAlpha = 1;
-        if (alive) {
-          rafRef.current = requestAnimationFrame(draw);
-        } else {
-          ctx.clearRect(0, 0, W, H);
+        if (p.opacity > 0) {
+          alive = true;
+          ctx.globalAlpha = p.opacity;
+          ctx.beginPath();
+          ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+          ctx.fillStyle = p.color;
+          ctx.fill();
         }
-      }
+      });
 
-      rafRef.current = requestAnimationFrame(draw);
-    }
-
-    if (!unlocked) {
-      hasAnimated.current = false;
-      if (rafRef.current) {
-        cancelAnimationFrame(rafRef.current);
-        rafRef.current = null;
+      ctx.globalAlpha = 1;
+      if (alive) {
+        rafRef.current = requestAnimationFrame(draw);
+      } else {
+        ctx.clearRect(0, 0, W, H);
       }
     }
+
+    rafRef.current = requestAnimationFrame(draw);
 
     return () => {
       if (rafRef.current) cancelAnimationFrame(rafRef.current);
@@ -124,111 +120,97 @@ export default function Scene5CTA({ unlocked }: { unlocked: boolean }) {
           opacity: 0,
         }}
       >
-        {unlocked ? (
-          <>
-            <Typography
-              sx={{
-                fontFamily: 'var(--font-nunito)',
-                color: '#a855f7',
-                fontWeight: 700,
-                fontSize: '14px',
-                textTransform: 'uppercase',
-                letterSpacing: '2px',
-                mb: '10px',
-              }}
-            >
-              ✨ The Shield Activates!
-            </Typography>
+        <Typography
+          sx={{
+            fontFamily: 'var(--font-nunito)',
+            color: '#a855f7',
+            fontWeight: 700,
+            fontSize: '14px',
+            textTransform: 'uppercase',
+            letterSpacing: '2px',
+            mb: '10px',
+          }}
+        >
+          ✨ The Shield Activates!
+        </Typography>
 
-            <Typography
-              sx={{
-                fontFamily: 'var(--font-nunito)',
-                fontSize: 'clamp(36px, 6vw, 52px)',
-                lineHeight: 1.1,
-                fontWeight: 800,
-                color: '#fff',
-                mb: '16px',
-              }}
-            >
-              Will Alex & DT
-              <br />
-              <Box
-                component="span"
-                sx={{
-                  background: 'linear-gradient(to right, #7dd3fc, #c084fc)',
-                  WebkitBackgroundClip: 'text',
-                  WebkitTextFillColor: 'transparent',
-                }}
-              >
-                save D-Teddy?
-              </Box>
-            </Typography>
+        <Typography
+          sx={{
+            fontFamily: 'var(--font-nunito)',
+            fontSize: 'clamp(36px, 6vw, 52px)',
+            lineHeight: 1.1,
+            fontWeight: 800,
+            color: '#fff',
+            mb: '16px',
+          }}
+        >
+          Will Alex & DT
+          <br />
+          <Box
+            component="span"
+            sx={{
+              background: 'linear-gradient(to right, #7dd3fc, #c084fc)',
+              WebkitBackgroundClip: 'text',
+              WebkitTextFillColor: 'transparent',
+            }}
+          >
+            save D-Teddy?
+          </Box>
+        </Typography>
 
-            <Typography
-              sx={{
-                fontFamily: 'var(--font-nunito)',
-                color: '#94a3b8',
-                fontSize: { xs: '0.95rem', md: '18px' },
-                lineHeight: 1.6,
-                mb: '30px',
-              }}
-            >
-              A magical adventure story where children discover real digital world safety lessons — through playful code swarms, data meshes, and one very important teddy bear.
-            </Typography>
+        <Typography
+          sx={{
+            fontFamily: 'var(--font-nunito)',
+            color: '#94a3b8',
+            fontSize: { xs: '0.95rem', md: '18px' },
+            lineHeight: 1.6,
+            mb: '30px',
+          }}
+        >
+          A magical adventure story where children discover real digital world safety lessons — through playful code swarms, data meshes, and one very important teddy bear.
+        </Typography>
 
-            <Box sx={{ display: 'flex', gap: 2, justifyContent: 'center', flexWrap: 'wrap' }}>
-              <Button
-                variant="contained"
-                disableElevation
-                href="#"
-                sx={{
-                  background: 'linear-gradient(135deg, #6d28d9, #a855f7)',
-                  color: '#fff',
-                  fontFamily: 'var(--font-nunito)',
-                  fontSize: '16px',
-                  fontWeight: 700,
-                  px: '36px',
-                  py: '14px',
-                  borderRadius: '30px',
-                  boxShadow: '0 4px 20px rgba(139,92,246,0.4)',
-                  '&:hover': { opacity: 0.9, transform: 'scale(1.03)' },
-                  transition: 'all 0.2s',
-                }}
-              >
-                🚀 Get the Physical Book
-              </Button>
-              <Button
-                variant="outlined"
-                href="#"
-                sx={{
-                  background: 'rgba(255,255,255,0.05)',
-                  color: '#fff',
-                  fontFamily: 'var(--font-nunito)',
-                  fontSize: '16px',
-                  fontWeight: 700,
-                  px: '36px',
-                  py: '14px',
-                  borderRadius: '30px',
-                  border: '1px solid rgba(255,255,255,0.15)',
-                  '&:hover': { background: 'rgba(255,255,255,0.1)', borderColor: 'rgba(255,255,255,0.3)' },
-                  transition: 'all 0.2s',
-                }}
-              >
-                📖 Read a Free Preview
-              </Button>
-            </Box>
-          </>
-        ) : (
-          <>
-            <Typography sx={{ fontSize: '2.2rem', mb: 1.5 }}>🔒</Typography>
-            <Typography sx={{ fontFamily: 'var(--font-nunito)', fontWeight: 800, fontSize: { xs: '1.2rem', md: '1.45rem' }, color: 'rgba(255,255,255,0.45)', mb: 1 }}>
-              The fortress awaits...
-            </Typography>
-            <Typography sx={{ fontFamily: 'var(--font-nunito)', fontWeight: 400, fontSize: { xs: '0.82rem', md: '0.88rem' }, color: 'rgba(255,255,255,0.3)' }}>
-              Complete the consent game to unlock this chapter.
-            </Typography>
-          </>
-        )}
+        <Box sx={{ display: 'flex', gap: 2, justifyContent: 'center', flexWrap: 'wrap' }}>
+          <Button
+            variant="contained"
+            disableElevation
+            href="#"
+            sx={{
+              background: 'linear-gradient(135deg, #6d28d9, #a855f7)',
+              color: '#fff',
+              fontFamily: 'var(--font-nunito)',
+              fontSize: '16px',
+              fontWeight: 700,
+              px: '36px',
+              py: '14px',
+              borderRadius: '30px',
+              boxShadow: '0 4px 20px rgba(139,92,246,0.4)',
+              '&:hover': { opacity: 0.9, transform: 'scale(1.03)' },
+              transition: 'all 0.2s',
+            }}
+          >
+            🚀 Get the Physical Book
+          </Button>
+          <Button
+            variant="outlined"
+            href="#"
+            sx={{
+              background: 'rgba(255,255,255,0.05)',
+              color: '#fff',
+              fontFamily: 'var(--font-nunito)',
+              fontSize: '16px',
+              fontWeight: 700,
+              px: '36px',
+              py: '14px',
+              borderRadius: '30px',
+              border: '1px solid rgba(255,255,255,0.15)',
+              '&:hover': { background: 'rgba(255,255,255,0.1)', borderColor: 'rgba(255,255,255,0.3)' },
+              transition: 'all 0.2s',
+            }}
+          >
+            📖 Get the E-Book
+          </Button>
+        </Box>
       </Box>
     </Box>
   );

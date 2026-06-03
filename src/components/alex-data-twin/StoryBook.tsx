@@ -2,6 +2,7 @@
 
 import { useRef, useEffect, useState, useCallback } from 'react';
 import { Box } from '@mui/material';
+import { useRouter } from 'next/navigation';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import Scene1Kitchen from './Scene1Kitchen';
@@ -13,6 +14,7 @@ import DigitalCurtain from './DigitalCurtain';
 const SCENES = 3;
 
 export default function StoryBook() {
+  const router = useRouter();
   const containerRef = useRef<HTMLDivElement>(null);
   const stripRef = useRef<HTMLDivElement>(null);
   const stRef = useRef<ScrollTrigger | null>(null);
@@ -108,7 +110,7 @@ export default function StoryBook() {
 
     return () => {
       stRef.current = null;
-      ctx.revert();
+      ctx.revert(); // reverts only animations created inside this context
     };
   }, [handleStay, updateActiveScene]);
 
@@ -201,8 +203,53 @@ export default function StoryBook() {
     curtainFiredRef.current = false;
   }, []);
 
+  const handleGoHome = useCallback(() => {
+    // Kill only our own ScrollTrigger — global kills would destroy the home page's triggers too
+    if (stRef.current) {
+      stRef.current.kill();
+      stRef.current = null;
+    }
+    document.body.style.overflow = '';
+    document.body.style.overflowY = '';
+    document.documentElement.style.overflow = '';
+    window.scrollTo(0, 0);
+    router.push('/');
+  }, [router]);
+
   return (
     <>
+      {/* Back to home */}
+      <Box
+        onClick={handleGoHome}
+        sx={{
+          position: 'fixed',
+          top: 20,
+          left: 20,
+          zIndex: 9999,
+          display: 'flex',
+          alignItems: 'center',
+          gap: '8px',
+          backgroundColor: 'rgba(255,255,255,0.12)',
+          backdropFilter: 'blur(10px)',
+          border: '1px solid rgba(255,255,255,0.2)',
+          color: '#fff',
+          fontFamily: 'var(--font-nunito)',
+          fontWeight: 700,
+          fontSize: '14px',
+          px: '16px',
+          py: '10px',
+          borderRadius: '30px',
+          cursor: 'pointer',
+          transition: 'background-color 0.2s, transform 0.2s',
+          '&:hover': {
+            backgroundColor: 'rgba(255,255,255,0.22)',
+            transform: 'translateX(-2px)',
+          },
+        }}
+      >
+        ← Home
+      </Box>
+
       <DigitalCurtain active={curtainActive} onComplete={handleCurtainComplete} />
 
       <Box ref={containerRef} sx={{ position: 'relative', width: '100vw', height: '100vh', overflow: 'hidden' }}>
@@ -244,6 +291,7 @@ export default function StoryBook() {
                 inset: 0,
                 zIndex: 10,
                 willChange: 'opacity',
+                pointerEvents: isMirrorActive ? 'none' : 'auto',
               }}
             >
               <Scene1Kitchen />

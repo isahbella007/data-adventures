@@ -23,14 +23,18 @@ export default function ShirleyPage() {
 
   useEffect(() => {
     if (heroTextRef.current) {
-      gsap.from(Array.from(heroTextRef.current.children), {
-        opacity: 0, y: 25, duration: 0.8, stagger: 0.12, ease: 'power2.out',
-      });
+      gsap.fromTo(
+        Array.from(heroTextRef.current.children),
+        { opacity: 0, y: 25 },
+        { opacity: 1, y: 0, duration: 0.8, stagger: 0.12, ease: 'power2.out' }
+      );
     }
     if (heroImgRef.current) {
-      gsap.from(heroImgRef.current, {
-        opacity: 0, scale: 0.96, duration: 1.2, ease: 'power2.out', delay: 0.2,
-      });
+      gsap.fromTo(
+        heroImgRef.current,
+        { opacity: 0, scale: 0.96 },
+        { opacity: 1, scale: 1, duration: 1.2, ease: 'power2.out', delay: 0.2 }
+      );
     }
   }, []);
 

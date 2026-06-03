@@ -37,12 +37,12 @@ export default function Scene1Kitchen({ sx }: Scene1KitchenProps) {
           display: 'flex',
           flexDirection: 'column',
           justifyContent: 'flex-end',
-          padding: { xs: '40px 24px', md: '60px 40px' },
+          padding: { xs: '24px 24px', md: '32px 40px' },
           background: 'linear-gradient(to top, rgba(255,255,255,0.75) 0%, rgba(255,255,255,0) 40%)',
           transition: 'background 1.5s ease',
         }}
       >
-        <Box sx={{ maxWidth: 600, mx: 'auto', textAlign: 'center', mb: '24px' }}>
+        <Box sx={{ maxWidth: 600, mx: 'auto', textAlign: 'center', mb: '8px' }}>
           <Typography
             sx={{
               fontFamily: 'var(--font-nunito)',

@@ -49,21 +49,36 @@ export default function HomePage() {
     gsap.registerPlugin(ScrollTrigger);
 
     if (heroTextRef.current) {
-      gsap.from(Array.from(heroTextRef.current.children), {
-        opacity: 0, y: 30, duration: 0.8, stagger: 0.15, ease: 'power2.out',
-      });
+      gsap.fromTo(
+        Array.from(heroTextRef.current.children),
+        { opacity: 0, y: 30 },
+        { opacity: 1, y: 0, duration: 0.8, stagger: 0.15, ease: 'power2.out' }
+      );
     }
 
     if (heroArtRef.current) {
-      gsap.from(heroArtRef.current, { opacity: 0, x: 40, duration: 1.0, ease: 'power2.out', delay: 0.3 });
+      gsap.fromTo(
+        heroArtRef.current,
+        { opacity: 0, x: 40 },
+        { opacity: 1, x: 0, duration: 1.0, ease: 'power2.out', delay: 0.3 }
+      );
     }
 
     if (bookshelfRef.current) {
-      gsap.from(bookshelfRef.current.querySelectorAll('[data-card]'), {
-        scrollTrigger: { trigger: bookshelfRef.current, start: 'top 75%' },
-        opacity: 0, y: 40, duration: 0.8, stagger: 0.2, ease: 'power1.out',
-      });
+      gsap.fromTo(
+        bookshelfRef.current.querySelectorAll('[data-card]'),
+        { y: 40 },
+        {
+          y: 0,
+          duration: 0.8,
+          stagger: 0.2,
+          ease: 'power1.out',
+          scrollTrigger: { trigger: bookshelfRef.current, start: 'top 75%' },
+        }
+      );
     }
+
+    ScrollTrigger.refresh();
 
     return () => ScrollTrigger.getAll().forEach(t => t.kill());
   }, []);

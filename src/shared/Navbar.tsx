@@ -6,22 +6,19 @@ import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { usePathname } from 'next/navigation';
 
-const MotionButton = motion.create(Button as React.ComponentType<React.ComponentProps<typeof Button>>);
-
 export default function Navbar() {
   const pathname = usePathname();
   const [scrolled, setScrolled] = useState(false);
-
-  if (pathname === '/books/alex-data-twin') {
-    return null;
-  }
-
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 60);
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+
+  if (pathname === '/books/alex-data-twin') {
+    return null;
+  }
 
   return (
     <AppBar
