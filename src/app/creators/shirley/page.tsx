@@ -11,10 +11,10 @@ const TAGS = ['Author', 'AI Champion', 'Speaker', 'Data Literacy', 'CDO'];
 const TOPICS = ['Board Readiness', 'AI Governance', 'AI Literacy', 'Transformation Strategy'];
 
 const STATS = [
-  { value: 'Global',  label: 'Experience'                  },
-  { value: 'C-Suite', label: 'Executive-focused sessions'  },
-  { value: 'Real',    label: 'Implementation outcomes'     },
-  { value: 'Data',    label: 'Driven decisions'            },
+  { value: 'Global',  label: 'Experience'                 },
+  { value: 'C-Suite', label: 'Executive-focused sessions' },
+  { value: 'Real',    label: 'Implementation outcomes'    },
+  { value: 'Data',    label: 'Driven decisions'           },
 ];
 
 export default function ShirleyPage() {
@@ -26,90 +26,137 @@ export default function ShirleyPage() {
       gsap.fromTo(
         Array.from(heroTextRef.current.children),
         { opacity: 0, y: 25 },
-        { opacity: 1, y: 0, duration: 0.8, stagger: 0.12, ease: 'power2.out' }
+        { opacity: 1, y: 0, duration: 0.9, stagger: 0.12, ease: 'power2.out' }
       );
     }
     if (heroImgRef.current) {
       gsap.fromTo(
         heroImgRef.current,
-        { opacity: 0, scale: 0.96 },
-        { opacity: 1, scale: 1, duration: 1.2, ease: 'power2.out', delay: 0.2 }
+        { opacity: 0, scale: 0.97 },
+        { opacity: 1, scale: 1, duration: 1.2, ease: 'power2.out', delay: 0.25 }
       );
     }
   }, []);
 
   return (
-    <Box sx={{ backgroundColor: '#faf8f5', color: '#2e241f', overflowX: 'hidden' }}>
+    <Box sx={{ backgroundColor: '#080616', color: '#fff', overflowX: 'hidden' }}>
 
       {/* ── HERO ── */}
       <Box
         component="header"
         sx={{
-          minHeight: '90vh',
+          minHeight: '100vh',
           display: 'flex',
           alignItems: 'center',
           pt: { xs: '120px', md: '140px' },
-          pb: { xs: '60px', md: '80px' },
-          px: { xs: 3, md: '40px' },
-          // background: 'linear-gradient(135deg, #faf8f5 0%, #f1f5f9 100%)',
+          pb: { xs: '80px', md: '100px' },
+          px: { xs: 3, md: '60px' },
+          position: 'relative',
+          overflow: 'hidden',
+          background: 'radial-gradient(ellipse 80% 60% at 60% 40%, rgba(109,40,217,0.18) 0%, transparent 70%), linear-gradient(160deg, #0d0b22 0%, #080616 100%)',
         }}
       >
+        {/* Subtle grid overlay */}
         <Box
           sx={{
-            maxWidth: 1200,
+            position: 'absolute',
+            inset: 0,
+            backgroundImage: 'linear-gradient(rgba(167,139,250,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(167,139,250,0.04) 1px, transparent 1px)',
+            backgroundSize: '60px 60px',
+            pointerEvents: 'none',
+          }}
+        />
+
+        <Box
+          sx={{
+            maxWidth: 1280,
             mx: 'auto',
             width: '100%',
             display: 'grid',
-            gridTemplateColumns: { xs: '1fr', md: '1.2fr 0.8fr' },
-            gap: { xs: 5, md: '60px' },
+            gridTemplateColumns: { xs: '1fr', md: '1.15fr 0.85fr' },
+            gap: { xs: 6, md: '80px' },
             alignItems: 'center',
+            position: 'relative',
+            zIndex: 1,
           }}
         >
-          {/* Text */}
+          {/* Left — Text */}
           <Box ref={heroTextRef}>
-            <Typography
+            {/* Label */}
+            <Box
               sx={{
-                fontFamily: 'var(--font-inter)',
-                fontSize: '13px',
-                fontWeight: 700,
-                color: '#6d28d9',
-                textTransform: 'uppercase',
-                letterSpacing: '2px',
-                mb: '16px',
-                display: 'block',
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '8px',
+                border: '1px solid rgba(167,139,250,0.3)',
+                borderRadius: '30px',
+                px: '16px',
+                py: '6px',
+                mb: '28px',
               }}
             >
-              Chief Digital Officer & Author
-            </Typography>
+              <Box sx={{ width: 6, height: 6, borderRadius: '50%', backgroundColor: '#a78bfa' }} />
+              <Typography
+                sx={{
+                  fontFamily: 'var(--font-inter)',
+                  fontSize: '12px',
+                  fontWeight: 600,
+                  color: '#a78bfa',
+                  letterSpacing: '1.5px',
+                  textTransform: 'uppercase',
+                }}
+              >
+                Chief Digital Officer & Author
+              </Typography>
+            </Box>
 
+            {/* Main headline */}
             <Typography
               component="h1"
               sx={{
-                fontFamily: 'var(--font-nunito)',
-                fontSize: 'clamp(38px, 5.5vw, 64px)',
-                lineHeight: 1.1,
-                fontWeight: 700,
-                color: '#1e1b4b',
-                mb: '24px',
+                fontFamily: 'var(--font-playfair)',
+                fontSize: 'clamp(42px, 5.5vw, 72px)',
+                lineHeight: 1.08,
+                fontWeight: 800,
+                color: '#fff',
+                mb: '28px',
+                letterSpacing: '-0.02em',
               }}
             >
-              Demystifying AI.{' '}
+              Demystifying AI.
               <br />
               Bridging{' '}
-              <Box component="span" sx={{ color: '#0ea5e9' }}>Boardrooms</Box>
+              <Box
+                component="span"
+                sx={{
+                  background: 'linear-gradient(90deg, #7dd3fc, #a78bfa)',
+                  WebkitBackgroundClip: 'text',
+                  WebkitTextFillColor: 'transparent',
+                }}
+              >
+                Boardrooms
+              </Box>
               {' & '}
-              <br />
-              <Box component="span" sx={{ color: '#6d28d9' }}>Storybooks.</Box>
+              <Box
+                component="span"
+                sx={{
+                  background: 'linear-gradient(90deg, #c084fc, #f0abfc)',
+                  WebkitBackgroundClip: 'text',
+                  WebkitTextFillColor: 'transparent',
+                }}
+              >
+                Storybooks.
+              </Box>
             </Typography>
 
             <Typography
               sx={{
                 fontFamily: 'var(--font-inter)',
-                fontSize: { xs: '16px', md: '19px' },
-                lineHeight: 1.6,
-                color: '#4b5563',
-                mb: '36px',
-                maxWidth: 580,
+                fontSize: { xs: '16px', md: '18px' },
+                lineHeight: 1.7,
+                color: 'rgba(255,255,255,0.6)',
+                mb: '40px',
+                maxWidth: 560,
               }}
             >
               Shirley Werchota coordinates complex enterprise digital frameworks for European financial entities while translating the exact same data rules into hand-painted fairy tales for young minds.
@@ -120,62 +167,68 @@ export default function ShirleyPage() {
                 href="#advisory"
                 disableElevation
                 sx={{
-                  backgroundColor: '#1e1b4b',
+                  background: 'linear-gradient(135deg, #6d28d9, #a855f7)',
                   color: '#fff',
                   fontFamily: 'var(--font-nunito)',
                   fontWeight: 700,
-                  fontSize: '16px',
+                  fontSize: '15px',
                   px: '32px',
                   py: '14px',
                   borderRadius: '30px',
-                  '&:hover': { backgroundColor: '#0f0d30', transform: 'translateY(-2px)' },
+                  boxShadow: '0 4px 24px rgba(109,40,217,0.4)',
+                  '&:hover': { opacity: 0.9, transform: 'translateY(-2px)', boxShadow: '0 8px 32px rgba(109,40,217,0.6)' },
                   transition: 'all 0.2s',
                 }}
               >
-                Executive Advisory 👔
+                Executive Advisory
               </Button>
               <Link href="/books/alex-data-twin" style={{ textDecoration: 'none' }}>
                 <Button
                   disableElevation
                   variant="outlined"
                   sx={{
-                    borderColor: '#6d28d9',
-                    color: '#6d28d9',
+                    borderColor: 'rgba(167,139,250,0.4)',
+                    borderWidth: 1,
+                    color: 'rgba(255,255,255,0.8)',
                     fontFamily: 'var(--font-nunito)',
                     fontWeight: 700,
-                    fontSize: '16px',
+                    fontSize: '15px',
                     px: '32px',
                     py: '14px',
                     borderRadius: '30px',
-                    borderWidth: 2,
-                    '&:hover': { backgroundColor: 'rgba(109,40,217,0.05)', transform: 'translateY(-2px)', borderWidth: 2 },
+                    '&:hover': { backgroundColor: 'rgba(167,139,250,0.1)', borderColor: '#a78bfa' },
                     transition: 'all 0.2s',
                   }}
                 >
-                  Explore Children's Books 📖
+                  Explore Books
                 </Button>
               </Link>
             </Box>
           </Box>
 
-          {/* Photo */}
+          {/* Right — Photo (transparent PNG cutout, floats on the grid) */}
           <Box
             ref={heroImgRef}
             sx={{
               width: '100%',
-              height: { xs: 360, md: 500 },
-              borderRadius: '30px',
-              overflow: 'hidden',
-              boxShadow: '0 20px 40px rgba(0,0,0,0.08)',
+              height: { xs: 420, md: 580 },
               position: 'relative',
-              background: 'linear-gradient(45deg, #1e1b4b 50%, #6d28d9 50%)',
+              display: 'flex',
+              alignItems: 'flex-end',
+              justifyContent: 'center',
             }}
           >
             <Image
-              src="/images/creators/shirley.jpg"
+              src="/images/creators/shirley2.png"
               alt="Shirley Werchota"
               fill
-              style={{ objectFit: 'cover', objectPosition: 'center top' }}
+              style={{
+                objectFit: 'contain',
+                objectPosition: 'center bottom',
+                filter: 'drop-shadow(0 0 28px rgba(167,139,250,0.5)) drop-shadow(0 0 60px rgba(109,40,217,0.3))',
+                maskImage: 'linear-gradient(to bottom, black 85%, transparent 100%)',
+                WebkitMaskImage: 'linear-gradient(to bottom, black 85%, transparent 100%)',
+              }}
               priority
             />
           </Box>
@@ -186,21 +239,21 @@ export default function ShirleyPage() {
       <Box
         component="section"
         sx={{
-          backgroundColor: '#ffffff',
-          py: '60px',
-          px: { xs: 3, md: '40px' },
-          borderTop: '1px solid #f3f4f6',
-          borderBottom: '1px solid #f3f4f6',
+          backgroundColor: '#100e28',
+          py: '56px',
+          px: { xs: 3, md: '60px' },
+          borderTop: '1px solid rgba(167,139,250,0.12)',
+          borderBottom: '1px solid rgba(167,139,250,0.12)',
         }}
       >
         <Box
           sx={{
-            maxWidth: 1200,
+            maxWidth: 1280,
             mx: 'auto',
             display: 'flex',
             alignItems: { xs: 'flex-start', md: 'center' },
             flexDirection: { xs: 'column', md: 'row' },
-            gap: { xs: '12px', md: '40px' },
+            gap: { xs: '16px', md: '48px' },
           }}
         >
           <Typography
@@ -208,9 +261,9 @@ export default function ShirleyPage() {
               fontFamily: 'var(--font-inter)',
               fontWeight: 700,
               textTransform: 'uppercase',
-              letterSpacing: '1.5px',
-              color: '#9ca3af',
-              fontSize: '14px',
+              letterSpacing: '2px',
+              color: 'rgba(167,139,250,0.6)',
+              fontSize: '11px',
               flexShrink: 0,
             }}
           >
@@ -218,19 +271,15 @@ export default function ShirleyPage() {
           </Typography>
           <Box
             component="blockquote"
-            sx={{
-              borderLeft: '3px solid #6d28d9',
-              pl: { xs: '16px', md: '24px' },
-              m: 0,
-            }}
+            sx={{ borderLeft: '2px solid #a78bfa', pl: { xs: '20px', md: '32px' }, m: 0 }}
           >
             <Typography
               sx={{
                 fontFamily: 'var(--font-playfair)',
                 fontSize: { xs: '20px', md: '26px' },
                 fontWeight: 700,
-                lineHeight: 1.4,
-                color: '#1e1b4b',
+                lineHeight: 1.5,
+                color: 'rgba(255,255,255,0.9)',
                 fontStyle: 'italic',
               }}
             >
@@ -244,15 +293,15 @@ export default function ShirleyPage() {
       <Box
         id="advisory"
         component="section"
-        sx={{ py: { xs: '70px', md: '100px' }, px: { xs: 3, md: '40px' }, backgroundColor: '#faf8f5' }}
+        sx={{ py: { xs: '80px', md: '120px' }, px: { xs: 3, md: '60px' }, backgroundColor: '#080616' }}
       >
         <Box
           sx={{
-            maxWidth: 1200,
+            maxWidth: 1280,
             mx: 'auto',
             display: 'flex',
             flexDirection: { xs: 'column', md: 'row' },
-            gap: { xs: 5, md: '60px' },
+            gap: { xs: 6, md: '80px' },
             alignItems: 'center',
           }}
         >
@@ -260,42 +309,57 @@ export default function ShirleyPage() {
           <Box sx={{ flex: '1.2' }}>
             <Typography
               sx={{
-                fontFamily: 'var(--font-playfair)',
-                fontSize: { xs: '32px', md: '46px' },
-                color: '#1e1b4b',
-                lineHeight: 1.1,
-                mb: '20px',
-                fontWeight: 800,
+                fontFamily: 'var(--font-inter)',
+                fontSize: '11px',
+                fontWeight: 700,
+                color: 'rgba(167,139,250,0.7)',
+                textTransform: 'uppercase',
+                letterSpacing: '2px',
+                mb: '16px',
               }}
             >
-              Executive AI <br /> Advisory
+              Services
+            </Typography>
+            <Typography
+              sx={{
+                fontFamily: 'var(--font-playfair)',
+                fontSize: { xs: '34px', md: '50px' },
+                color: '#fff',
+                lineHeight: 1.08,
+                mb: '20px',
+                fontWeight: 800,
+                letterSpacing: '-0.01em',
+              }}
+            >
+              Executive AI<br />Advisory
             </Typography>
             <Typography
               sx={{
                 fontFamily: 'var(--font-inter)',
                 fontSize: '16px',
-                lineHeight: 1.6,
-                color: '#4b5563',
-                mb: '28px',
+                lineHeight: 1.7,
+                color: 'rgba(255,255,255,0.55)',
+                mb: '32px',
+                maxWidth: 480,
               }}
             >
               Boards don't need more hype. They need an executable roadmap. Shirley works directly with C-suite leaders to move AI from strategy document to measurable business outcome.
             </Typography>
 
-            <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: '10px', mb: '36px' }}>
+            <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: '10px', mb: '40px' }}>
               {TOPICS.map((t) => (
                 <Box
                   key={t}
                   sx={{
-                    backgroundColor: '#fff',
-                    border: '1px solid #e5e7eb',
+                    backgroundColor: 'rgba(167,139,250,0.08)',
+                    border: '1px solid rgba(167,139,250,0.2)',
                     px: '18px',
                     py: '8px',
                     borderRadius: '20px',
                     fontFamily: 'var(--font-inter)',
-                    fontSize: '14px',
+                    fontSize: '13px',
                     fontWeight: 600,
-                    color: '#4b5563',
+                    color: '#a78bfa',
                   }}
                 >
                   {t}
@@ -307,16 +371,16 @@ export default function ShirleyPage() {
               disableElevation
               variant="outlined"
               sx={{
-                borderColor: '#1e1b4b',
-                borderWidth: 2,
-                color: '#1e1b4b',
+                borderColor: 'rgba(167,139,250,0.35)',
+                borderWidth: 1,
+                color: 'rgba(255,255,255,0.8)',
                 fontFamily: 'var(--font-nunito)',
                 fontWeight: 700,
-                fontSize: '16px',
+                fontSize: '15px',
                 px: '32px',
-                py: '14px',
+                py: '13px',
                 borderRadius: '30px',
-                '&:hover': { backgroundColor: 'rgba(30,27,75,0.05)', borderWidth: 2 },
+                '&:hover': { backgroundColor: 'rgba(167,139,250,0.1)', borderColor: '#a78bfa' },
                 transition: 'all 0.2s',
               }}
             >
@@ -326,32 +390,36 @@ export default function ShirleyPage() {
 
           {/* Stats grid */}
           <Box sx={{ flex: '0.8', width: '100%' }}>
-            <Box sx={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '20px' }}>
+            <Box sx={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px' }}>
               {STATS.map((s) => (
                 <Box
                   key={s.value}
                   sx={{
-                    backgroundColor: '#fff',
-                    p: { xs: '24px 20px', md: '30px 24px' },
+                    backgroundColor: '#100e28',
+                    p: { xs: '28px 22px', md: '36px 28px' },
                     borderRadius: '20px',
-                    boxShadow: '0 4px 20px rgba(0,0,0,0.03)',
-                    border: '1px solid #e5e7eb',
+                    border: '1px solid rgba(167,139,250,0.12)',
+                    boxShadow: '0 4px 30px rgba(0,0,0,0.3)',
+                    transition: 'border-color 0.2s',
+                    '&:hover': { borderColor: 'rgba(167,139,250,0.35)' },
                   }}
                 >
                   <Typography
                     sx={{
                       fontFamily: 'var(--font-playfair)',
-                      fontSize: '28px',
+                      fontSize: '30px',
                       fontWeight: 800,
-                      color: '#6d28d9',
+                      background: 'linear-gradient(135deg, #a78bfa, #c084fc)',
+                      WebkitBackgroundClip: 'text',
+                      WebkitTextFillColor: 'transparent',
                       display: 'block',
-                      mb: '4px',
+                      mb: '6px',
                     }}
                   >
                     {s.value}
                   </Typography>
                   <Typography
-                    sx={{ fontFamily: 'var(--font-inter)', fontSize: '13px', color: '#6b7280', fontWeight: 600 }}
+                    sx={{ fontFamily: 'var(--font-inter)', fontSize: '13px', color: 'rgba(255,255,255,0.4)', fontWeight: 500 }}
                   >
                     {s.label}
                   </Typography>
@@ -367,32 +435,33 @@ export default function ShirleyPage() {
         id="about"
         component="section"
         sx={{
-          py: { xs: '70px', md: '100px' },
-          px: { xs: 3, md: '40px' },
-          background: 'linear-gradient(135deg, #1e1b4b 0%, #2e1065 100%)',
-          color: '#fff',
+          py: { xs: '80px', md: '120px' },
+          px: { xs: 3, md: '60px' },
+          background: 'linear-gradient(160deg, #100e28 0%, #0d0b22 100%)',
+          borderTop: '1px solid rgba(167,139,250,0.1)',
         }}
       >
         <Box
           sx={{
-            maxWidth: 1200,
+            maxWidth: 1280,
             mx: 'auto',
             display: 'flex',
             flexDirection: { xs: 'column', md: 'row' },
-            gap: { xs: 5, md: '60px' },
+            gap: { xs: 6, md: '80px' },
             alignItems: 'center',
           }}
         >
           {/* Photo */}
           <Box
             sx={{
-              flex: '0.8',
+              flex: '0.75',
               width: '100%',
-              height: { xs: 360, md: 460 },
-              borderRadius: '24px',
+              height: { xs: 380, md: 500 },
+              borderRadius: '20px',
               overflow: 'hidden',
               position: 'relative',
               flexShrink: 0,
+              boxShadow: '0 0 0 1px rgba(167,139,250,0.15), 0 20px 60px rgba(0,0,0,0.5)',
             }}
           >
             <Image
@@ -404,17 +473,17 @@ export default function ShirleyPage() {
           </Box>
 
           {/* Bio */}
-          <Box sx={{ flex: '1.2' }}>
+          <Box sx={{ flex: '1.25' }}>
             <Typography
               sx={{
                 fontFamily: 'var(--font-inter)',
-                fontSize: '12px',
+                fontSize: '11px',
                 fontWeight: 700,
-                color: '#a78bfa',
+                color: 'rgba(167,139,250,0.7)',
                 textTransform: 'uppercase',
                 letterSpacing: '2px',
                 display: 'block',
-                mb: '12px',
+                mb: '16px',
               }}
             >
               About Shirley
@@ -423,39 +492,42 @@ export default function ShirleyPage() {
             <Typography
               sx={{
                 fontFamily: 'var(--font-playfair)',
-                fontSize: { xs: '34px', md: '48px' },
-                lineHeight: 1.1,
-                mb: '24px',
+                fontSize: { xs: '36px', md: '52px' },
+                lineHeight: 1.08,
+                mb: '28px',
                 fontWeight: 800,
+                color: '#fff',
+                letterSpacing: '-0.01em',
               }}
             >
               CDO.<br />Author.<br />Data Advocate.
             </Typography>
 
             <Typography
-              sx={{ fontFamily: 'var(--font-inter)', fontSize: '16px', lineHeight: 1.7, color: 'rgba(255,255,255,0.8)', mb: '20px' }}
+              sx={{ fontFamily: 'var(--font-inter)', fontSize: '16px', lineHeight: 1.75, color: 'rgba(255,255,255,0.6)', mb: '18px' }}
             >
               Shirley Werchota is a trilingual technology executive and Chief Digital Officer with a career spanning Orange Business, Raiffeisenbank International, and Accenture. She builds digital and AI functions from the ground up — and has launched a full technology venture in under six months.
             </Typography>
             <Typography
-              sx={{ fontFamily: 'var(--font-inter)', fontSize: '16px', lineHeight: 1.7, color: 'rgba(255,255,255,0.8)', mb: '32px' }}
+              sx={{ fontFamily: 'var(--font-inter)', fontSize: '16px', lineHeight: 1.75, color: 'rgba(255,255,255,0.6)', mb: '36px' }}
             >
               A recognised voice at European political and economic forums, she coaches boards on turning AI ambition into executable strategy. And when she's not in the boardroom, she's writing books that teach children the same thing — in a language they understand.
             </Typography>
 
-            <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: '10px', mb: '32px' }}>
+            <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: '10px', mb: '36px' }}>
               {TAGS.map((tag) => (
                 <Box
                   key={tag}
                   sx={{
-                    backgroundColor: 'rgba(255,255,255,0.08)',
+                    backgroundColor: 'rgba(167,139,250,0.08)',
+                    border: '1px solid rgba(167,139,250,0.18)',
                     px: '16px',
-                    py: '6px',
+                    py: '7px',
                     borderRadius: '20px',
                     fontFamily: 'var(--font-inter)',
                     fontSize: '13px',
                     fontWeight: 600,
-                    color: '#c084fc',
+                    color: 'rgba(167,139,250,0.9)',
                   }}
                 >
                   {tag}
@@ -467,19 +539,18 @@ export default function ShirleyPage() {
               href="https://linkedin.com"
               target="_blank"
               rel="noopener noreferrer"
-              variant="outlined"
               disableElevation
               sx={{
-                borderColor: 'rgba(255,255,255,0.4)',
-                borderWidth: 2,
+                background: 'linear-gradient(135deg, #6d28d9, #a855f7)',
                 color: '#fff',
                 fontFamily: 'var(--font-nunito)',
                 fontWeight: 700,
-                fontSize: '16px',
+                fontSize: '15px',
                 px: '32px',
                 py: '14px',
                 borderRadius: '30px',
-                '&:hover': { backgroundColor: 'rgba(255,255,255,0.1)', borderWidth: 2 },
+                boxShadow: '0 4px 24px rgba(109,40,217,0.35)',
+                '&:hover': { opacity: 0.9, transform: 'translateY(-2px)', boxShadow: '0 8px 32px rgba(109,40,217,0.55)' },
                 transition: 'all 0.2s',
               }}
             >
