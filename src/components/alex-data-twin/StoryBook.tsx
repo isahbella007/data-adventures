@@ -36,25 +36,6 @@ export default function StoryBook() {
     activeSceneRef.current = newScene;
   }, []);
 
-  // Jump to a scene instantly (used under the curtain where the scroll is invisible)
-  const jumpToScene = useCallback((index: number) => {
-    isJumpingRef.current = true;
-    updateActiveScene(index);
-    const attempt = () => {
-      const st = stRef.current;
-      if (!st) {
-        setTimeout(attempt, 80);
-        return;
-      }
-      const progress = index / (SCENES - 1);
-      window.scrollTo({ top: st.start + progress * (st.end - st.start) });
-      setTimeout(() => {
-        isJumpingRef.current = false;
-      }, 150);
-    };
-    attempt();
-  }, [updateActiveScene]);
-
   // Stay / Return to Scene 1 transition (covers peak coverage timing)
   const handleStay = useCallback(() => {
     if (curtainFiredRef.current) return;
@@ -67,6 +48,10 @@ export default function StoryBook() {
       gsap.to(kitchenRef.current, { opacity: 1, duration: 1.5, ease: 'power2.inOut' });
       gsap.to(mirrorRef.current, { opacity: 0, duration: 1.5, ease: 'power2.inOut' });
     }, 800);
+  }, []);
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
   }, []);
 
   useEffect(() => {
