@@ -37,8 +37,10 @@ export default function Scene1Kitchen({ sx }: Scene1KitchenProps) {
           display: 'flex',
           flexDirection: 'column',
           justifyContent: 'flex-end',
-          padding: { xs: '24px 24px', md: '32px 40px' },
-          background: 'linear-gradient(to top, rgba(255,255,255,0.75) 0%, rgba(255,255,255,0) 40%)',
+          pt: { xs: '24px', md: '32px' },
+          px: { xs: '20px', md: '40px' },
+          pb: { xs: 'max(56px, calc(env(safe-area-inset-bottom) + 40px))', md: '32px' },
+          background: { xs: 'linear-gradient(to top, rgba(255,255,255,0.9) 0%, rgba(255,255,255,0) 60%)', md: 'linear-gradient(to top, rgba(255,255,255,0.75) 0%, rgba(255,255,255,0) 40%)' },
           transition: 'background 1.5s ease',
         }}
       >

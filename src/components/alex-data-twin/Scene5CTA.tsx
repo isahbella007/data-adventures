@@ -193,7 +193,7 @@ export default function Scene5CTA({ unlocked }: { unlocked: boolean }) {
           </Button>
           <Button
             variant="outlined"
-            href="#"
+            href="https://selar.com/e507813588"
             sx={{
               background: 'rgba(255,255,255,0.05)',
               color: '#fff',
@@ -208,7 +208,7 @@ export default function Scene5CTA({ unlocked }: { unlocked: boolean }) {
               transition: 'all 0.2s',
             }}
           >
-            📖 Get the E-Book
+            🇳🇬 Get the E-Book
           </Button>
         </Box>
       </Box>

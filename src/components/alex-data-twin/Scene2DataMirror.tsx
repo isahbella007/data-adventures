@@ -53,8 +53,10 @@ export default function Scene2DataMirror({ active, onDive, sx }: Props) {
           display: 'flex',
           flexDirection: 'column',
           justifyContent: 'flex-end',
-          padding: { xs: '40px 24px', md: '60px 40px' },
-          background: 'linear-gradient(to top, rgba(3,0,25,0.85) 0%, rgba(3,0,25,0) 50%)',
+          pt: { xs: '40px', md: '60px' },
+          px: { xs: '20px', md: '40px' },
+          pb: { xs: 'max(64px, calc(env(safe-area-inset-bottom) + 48px))', md: '60px' },
+          background: { xs: 'linear-gradient(to top, rgba(3,0,25,0.95) 0%, rgba(3,0,25,0) 65%)', md: 'linear-gradient(to top, rgba(3,0,25,0.85) 0%, rgba(3,0,25,0) 50%)' },
           transition: 'background 1.5s ease',
         }}
       >
