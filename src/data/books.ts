@@ -5,6 +5,7 @@ export interface Book {
   desc: string;
   opacity: number;
   cover: string | null;
+  href?: string;
 }
 
 export const BOOKS: Book[] = [
@@ -15,6 +16,7 @@ export const BOOKS: Book[] = [
     desc: 'An enchanting story introducing young minds to the concepts of online data privacy and tracking footprints.',
     opacity: 1,
     cover: '/images/kitchen-real.png',
+    href: '/books/alex-data-twin',
   },
   {
     title: 'The Privacy Pixies',

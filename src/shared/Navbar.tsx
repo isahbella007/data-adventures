@@ -53,7 +53,7 @@ export default function Navbar() {
               letterSpacing: '-0.01em',
             }}
           >
-            Data Adventures
+            Data World Adventures
           </Typography>
         </Link>
 

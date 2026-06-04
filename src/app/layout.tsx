@@ -41,7 +41,7 @@ const syne = Syne({
 });
 
 export const metadata: Metadata = {
-  title: 'Data Adventures',
+  title: 'Data World Adventures',
   description: 'Storybook adventures that make data fun for kids.',
 };
 

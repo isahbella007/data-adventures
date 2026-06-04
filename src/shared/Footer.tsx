@@ -43,7 +43,7 @@ export default function Footer() {
               mb: 1.5,
             }}
           >
-            Data Adventures
+            Data World Adventures
           </Typography>
           <Typography
             sx={{

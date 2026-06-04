@@ -328,55 +328,61 @@ export default function HomePage() {
             alignItems: 'stretch',
           }}
         >
-          {BOOKS.map((book) => (
-            <Box
-              key={book.title}
-              data-card
-              sx={{
-                backgroundColor: '#faf8f5',
-                borderRadius: '20px',
-                p: '24px',
-                border: '1px solid #e5e7eb',
-                opacity: book.opacity,
-                transition: 'transform 0.3s ease',
-                '&:hover': { transform: 'translateY(-6px)' },
-                display: 'flex',
-                flexDirection: 'column',
-                minHeight: 0,
-              }}
-            >
+          {BOOKS.map((book) => {
+            const card = (
               <Box
+                key={book.title}
+                data-card
                 sx={{
-                  width: '100%',
-                  height: 320,
-                  backgroundColor: '#e5e7eb',
-                  borderRadius: '12px',
-                  mb: '20px',
-                  overflow: 'hidden',
+                  backgroundColor: '#faf8f5',
+                  borderRadius: '20px',
+                  p: '24px',
+                  border: '1px solid #e5e7eb',
+                  opacity: book.opacity,
+                  transition: 'transform 0.3s ease',
+                  '&:hover': { transform: 'translateY(-6px)' },
                   display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  position: 'relative',
-                  fontSize: '40px',
-                  flexShrink: 0,
+                  flexDirection: 'column',
+                  minHeight: 0,
+                  ...(book.href && { cursor: 'pointer' }),
                 }}
               >
-                {book.cover
-                  ? <Image src={book.cover} alt={book.title} fill style={{ objectFit: 'cover' }} />
-                  : '🔒'}
-              </Box>
+                <Box
+                  sx={{
+                    width: '100%',
+                    height: 320,
+                    backgroundColor: '#e5e7eb',
+                    borderRadius: '12px',
+                    mb: '20px',
+                    overflow: 'hidden',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    position: 'relative',
+                    fontSize: '40px',
+                    flexShrink: 0,
+                  }}
+                >
+                  {book.cover
+                    ? <Image src={book.cover} alt={book.title} fill style={{ objectFit: 'cover' }} />
+                    : '🔒'}
+                </Box>
 
-              <Typography sx={{ display: 'block', fontSize: '12px', fontWeight: 800, color: book.statusColor, textTransform: 'uppercase', mb: '12px' }}>
-                ● {book.status}
-              </Typography>
-              <Typography sx={{ fontFamily: 'var(--font-nunito)', fontWeight: 800, fontSize: '20px', color: '#1e1b4b', mb: '6px' }}>
-                {book.title}
-              </Typography>
-              <Typography sx={{ fontFamily: 'var(--font-dm-sans)', fontSize: '14px', color: '#6b7280', lineHeight: 1.5, flex: 1 }}>
-                {book.desc}
-              </Typography>
-            </Box>
-          ))}
+                <Typography sx={{ display: 'block', fontSize: '12px', fontWeight: 800, color: book.statusColor, textTransform: 'uppercase', mb: '12px' }}>
+                  ● {book.status}
+                </Typography>
+                <Typography sx={{ fontFamily: 'var(--font-nunito)', fontWeight: 800, fontSize: '20px', color: '#1e1b4b', mb: '6px' }}>
+                  {book.title}
+                </Typography>
+                <Typography sx={{ fontFamily: 'var(--font-dm-sans)', fontSize: '14px', color: '#6b7280', lineHeight: 1.5, flex: 1 }}>
+                  {book.desc}
+                </Typography>
+              </Box>
+            );
+            return book.href
+              ? <Link key={book.title} href={book.href} style={{ textDecoration: 'none' }}>{card}</Link>
+              : card;
+          })}
         </Box>
       </Box>
 
@@ -442,7 +448,7 @@ export default function HomePage() {
                   }}
                 >
                   {creator.image
-                    ? <Image src={creator.image} alt={creator.name} fill style={{ objectFit: 'cover', objectPosition: 'center top' }} />
+                    ? <Image src={creator.image} alt={creator.name} fill style={{ objectFit: 'cover', objectPosition: 'center center' }} />
                     : creator.fallbackEmoji}
                 </Box>
                 <Typography sx={{ fontFamily: 'var(--font-nunito)', fontSize: '12px', fontWeight: 800, color: '#a855f7', textTransform: 'uppercase', letterSpacing: '1px', mb: '6px' }}>
