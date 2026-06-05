@@ -6,7 +6,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import gsap from 'gsap';
 
-const TAGS = ['Author', 'AI Champion', 'Speaker', 'Data Literacy', 'CDO'];
+const TAGS = ['Author', 'AI Champion', 'Speaker', 'Data Literacy', 'CDO', 'CTO', 'CAIO'];
 
 const TOPICS = ['Board Readiness', 'AI Governance', 'AI Literacy', 'Transformation Strategy'];
 
@@ -159,7 +159,7 @@ export default function ShirleyPage() {
                 maxWidth: 560,
               }}
             >
-              Shirley Werchota coordinates complex enterprise digital frameworks for European financial entities while translating the exact same data rules into hand-painted fairy tales for young minds.
+              Shirley Werchota architects complex enterprise digital frameworks across global industries while translating the same data principles into hand-painted fairy tales for young minds.
             </Typography>
 
             <Box sx={{ display: 'flex', gap: 2, flexWrap: 'wrap' }}>
@@ -283,7 +283,7 @@ export default function ShirleyPage() {
                 fontStyle: 'italic',
               }}
             >
-              "Making data approachable — for the child discovering the world, and the executive navigating it."
+              "Making data approachable, for the child discovering the world, and the executive navigating it."
             </Typography>
           </Box>
         </Box>
@@ -530,12 +530,12 @@ export default function ShirleyPage() {
             <Typography
               sx={{ fontFamily: 'var(--font-inter)', fontSize: '16px', lineHeight: 1.75, color: 'rgba(255,255,255,0.6)', mb: '18px' }}
             >
-              Shirley Werchota is a trilingual technology executive and Chief Digital Officer with a career spanning Orange Business, Raiffeisenbank International, and Accenture. She builds digital and AI functions from the ground up — and has launched a full technology venture in under six months.
+              Shirley Werchota is a trilingual technology executive and Chief Digital Officer whose career spans Orange Business, Raiffeisen Bank International, and Accenture. She builds digital and AI functions from the ground up, having delivered enterprise data pipelines, cloud-first compliant infrastructure, and company-wide digital capability programmes across globally distributed operations.
             </Typography>
             <Typography
               sx={{ fontFamily: 'var(--font-inter)', fontSize: '16px', lineHeight: 1.75, color: 'rgba(255,255,255,0.6)', mb: '36px' }}
             >
-              A recognised voice at European political and economic forums, she coaches boards on turning AI ambition into executable strategy. And when she's not in the boardroom, she's writing books that teach children the same thing — in a language they understand.
+              A recognised voice at European political and economic forums, she coaches boards on turning AI ambition into executable strategy. And when she's not in the boardroom, she's writing books that teach children the same thing, in a language they understand.
             </Typography>
 
             <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: '10px', mb: '36px' }}>
@@ -560,7 +560,7 @@ export default function ShirleyPage() {
             </Box>
 
             <Button
-              href="https://linkedin.com"
+              href="https://www.linkedin.com/in/shirleywerchota/"
               target="_blank"
               rel="noopener noreferrer"
               disableElevation

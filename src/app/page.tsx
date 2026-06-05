@@ -34,7 +34,7 @@ const BUBBLE_VARIANTS = [
 
 const VALUES = [
   { icon: '🤝', title: 'Consent First', desc: 'Teaches children the core real-life value of giving and checking for permission before sharing personal things online.' },
-  { icon: '🌐', title: 'Demystifying Tech', desc: 'Breaks down invisible internet components — like networks, meshes, and servers — into visual, digestible concepts kids get instantly.' },
+  { icon: '🌐', title: 'Demystifying Tech', desc: 'Breaks down invisible internet components, like networks, meshes, and servers, into visual, digestible concepts kids get instantly.' },
   { icon: '🎨', title: 'Gentle Stories', desc: 'Replaces cold cyber screens with soft, hand-painted worlds, protecting the magic of a classic childhood story reading hour.' },
 ];
 
@@ -203,7 +203,7 @@ export default function HomePage() {
                 mb: '20px',
               }}
             >
-              Alex & His <br />
+              Alex & the <br />
               <Box component="span" sx={{ color: '#6d28d9' }}>Data Twin</Box>
             </Typography>
 
@@ -298,12 +298,12 @@ export default function HomePage() {
               mb: '32px',
             }}
           >
-            The massive influx of data shapes everything children see online — yet almost nothing exists to teach them about it.
+            Children are growing up leaving a trail of data behind them online, yet almost nothing exists to teach them what that means.
           </Typography>
 
           <Box sx={{ display: 'flex', flexDirection: 'column', gap: '20px', textAlign: 'left' }}>
             {[
-              "Alex's adventures bring these abstract concepts to life. As he explores the data world, children gain an intuitive grasp of how prevalent data really is — and how the trail we all leave online builds our digital profile.",
+              "Alex's adventures bring these abstract concepts to life. As he explores the data world, children gain an intuitive grasp of just how much data surrounds them, and how the trail we all leave online builds a digital footprint.",
               "The earlier we teach data literacy, the better-prepared children will be to make smart, safe choices online.",
             ].map((text, i) => (
               <Box key={i} sx={{ display: 'flex', gap: '16px', alignItems: 'flex-start' }}>
@@ -526,7 +526,7 @@ export default function HomePage() {
             >
               <InputBase
                 type="email"
-                placeholder="Enter parent email address..."
+                placeholder="Enter grown-up's email address..."
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 required

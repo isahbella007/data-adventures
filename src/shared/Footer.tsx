@@ -113,7 +113,7 @@ export default function Footer() {
             color: 'rgba(255,255,255,0.22)',
           }}
         >
-          © {new Date().getFullYear()} Data Adventures. All rights reserved.
+          © {new Date().getFullYear()} Data World Adventures. All rights reserved.
         </Typography>
         <Typography
           sx={{

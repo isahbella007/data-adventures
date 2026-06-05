@@ -87,7 +87,7 @@ export default function Scene2DataMirror({ active, onDive, sx }: Props) {
               lineHeight: 1.6,
             }}
           >
-            Alex steps through — and everything turns electric blue. He meets his twin, DigiAlex, who reveals a shocking missing-person mystery.
+            Alex steps through, and everything turns electric blue. He meets his twin, DT, who reveals a shocking missing-person mystery.
           </Typography>
         </Box>
 

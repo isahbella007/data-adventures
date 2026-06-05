@@ -167,14 +167,14 @@ export default function Scene5CTA({ unlocked }: { unlocked: boolean }) {
             mb: '30px',
           }}
         >
-          A magical adventure story where children discover real digital world safety lessons — through playful code swarms, data meshes, and one very important teddy bear.
+          A magical adventure story where children discover real digital world safety lessons, through playful pixel swarms, data meshes, and one very important teddy bear.
         </Typography>
 
         <Box sx={{ display: 'flex', gap: 2, justifyContent: 'center', flexWrap: 'wrap' }}>
           <Button
             variant="contained"
             disableElevation
-            href="https://selar.com/e507813588"
+            href="https://www.amazon.com/Alex-Data-Adventures-Digital-Mysteries/dp/B0CS2C161N/ref=sr_1_1?__mk_en_US=%C3%85M%C3%85%C5%BD%C3%95%C3%91&crid=2M84E4S2K0T5S&keywords=alex+data+adventures+in+the+digital+world&qid=1764896996&sprefix=alex+data+adventures+in+the+digital+worl%2Caps%2C302&sr=8-1"
             sx={{
               background: 'linear-gradient(135deg, #6d28d9, #a855f7)',
               color: '#fff',
@@ -189,7 +189,7 @@ export default function Scene5CTA({ unlocked }: { unlocked: boolean }) {
               transition: 'all 0.2s',
             }}
           >
-            🚀 Get the Physical Book
+            🚀 Get the Book on Amazon
           </Button>
           <Button
             variant="outlined"
@@ -208,7 +208,7 @@ export default function Scene5CTA({ unlocked }: { unlocked: boolean }) {
               transition: 'all 0.2s',
             }}
           >
-            Get the E-Book 🇳🇬 
+            🇳🇬 Get the E-Book on Selar
           </Button>
         </Box>
       </Box>
