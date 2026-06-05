@@ -55,10 +55,10 @@ export default function Scene1Kitchen({ sx }: Scene1KitchenProps) {
             }}
           >
             <Box component="span" sx={{ color: '#1c0a00', display: 'block' }}>
-              Alex & His
+              Alex & the
             </Box>
             <Box component="span" sx={{ color: '#7c3aed', display: 'block' }}>
-              Digital Twin
+              Data Twin
             </Box>
           </Typography>
           <Typography
@@ -70,7 +70,7 @@ export default function Scene1Kitchen({ sx }: Scene1KitchenProps) {
               lineHeight: 1.6,
             }}
           >
-            One day Alex looks into Mum's tablet and sees a reflection staring back — except it isn't just a reflection. It's him. But different. And it wants to talk.
+            One day Alex looks into Mum's tablet and sees a reflection staring back, except it isn't just a reflection. It's him. But different. And it wants to talk.
           </Typography>
         </Box>
       </Box>
