@@ -11,16 +11,23 @@ export const CREATORS: Creator[] = [
   {
     role: 'Author & Founder',
     name: 'Shirley Werchota',
-    bio: 'Born in Tunisia to an Austrian father and Zimbabwean mother, Shirley has lived across two continents in six countries. A former painter turned data security strategist, she built this series to give children the digital literacy toolkit the world forgot to build.',
+    bio: 'Born in Tunisia to an Austrian father and Zimbabwean mother, Shirley has lived across two continents in six countries. A former painter turned data & security strategist, she built this series to give children the digital literacy toolkit the world forgot to build.',
     image: '/images/creators/shirley.jpg',
     fallbackEmoji: '✍️',
     href: '/creators/shirley',
   },
   {
-    role: 'Illustrator — Alex & DT',
+    role: 'Illustrator of Alex & DT',
     name: 'Mamta Panara',
     bio: 'A self-taught artist born and based in Nairobi, Kenya, whose work now sells across Europe. Mamta brings hand-crafted warmth to every world Alex explores — turning invisible tech concepts into paintings you want to step inside.',
     image: null,
     fallbackEmoji: '🎨',
+  },
+  {
+    role: 'Editor of Alex & DT',
+    name: 'Barbara Lanz',
+    bio: 'An art historian with a knack for adventure and travelling the world, Barbara finds beauty in the old things, crafted with care and precision. She brings her keen eye for detail, making this story truly land as it should.',
+    image: null,
+    fallbackEmoji: '✨',
   },
 ];
