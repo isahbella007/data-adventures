@@ -167,7 +167,7 @@ export default function Scene5CTA({ unlocked }: { unlocked: boolean }) {
             mb: '30px',
           }}
         >
-          A magical adventure story where children discover real digital world safety lessons — through playful code swarms, data meshes, and one very important teddy bear.
+          A magical adventure story where children discover real digital world safety lessons, through playful pixel swarms, data meshes, and one very important teddy bear.
         </Typography>
 
         <Box sx={{ display: 'flex', gap: 2, justifyContent: 'center', flexWrap: 'wrap' }}>
@@ -189,7 +189,7 @@ export default function Scene5CTA({ unlocked }: { unlocked: boolean }) {
               transition: 'all 0.2s',
             }}
           >
-            🚀 Get the Physical Book
+            🚀 Get the Book on Amazon
           </Button>
           <Button
             variant="outlined"
@@ -208,7 +208,7 @@ export default function Scene5CTA({ unlocked }: { unlocked: boolean }) {
               transition: 'all 0.2s',
             }}
           >
-            🇳🇬 Get the E-Book
+            🇳🇬 Get the E-Book on Selar
           </Button>
         </Box>
       </Box>
