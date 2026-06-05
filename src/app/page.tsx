@@ -45,6 +45,33 @@ export default function HomePage() {
   const [email, setEmail] = useState('');
   const [submitted, setSubmitted] = useState(false);
 
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState('');
+  
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setLoading(true);
+    setError('');
+
+    try {
+      const res = await fetch('/api/subscribe', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email }),
+      });
+
+      const data = await res.json();
+
+      if (!res.ok) throw new Error(data.error);
+
+      setSubmitted(true);
+    } catch (err: any) {
+      setError(err.message || 'Something went wrong, please try again.');
+    } finally {
+      setLoading(false);
+    }
+  };
+
   useEffect(() => {
     gsap.registerPlugin(ScrollTrigger);
 
@@ -494,7 +521,7 @@ export default function HomePage() {
           ) : (
             <Box
               component="form"
-              onSubmit={(e) => { e.preventDefault(); setSubmitted(true); }}
+              onSubmit={handleSubmit}
               sx={{ display: 'flex', gap: '10px', flexDirection: { xs: 'column', sm: 'row' } }}
             >
               <InputBase
@@ -518,6 +545,7 @@ export default function HomePage() {
               />
               <Button
                 type="submit"
+                disabled={loading}
                 disableElevation
                 sx={{
                   backgroundColor: '#0ea5e9',
@@ -530,10 +558,16 @@ export default function HomePage() {
                   borderRadius: '30px',
                   whiteSpace: 'nowrap',
                   '&:hover': { backgroundColor: '#0284c7' },
-                }}
-              >
-                Join Club 🚀
+  }}
+>
+  {loading ? 'Joining...' : 'Join Club 🚀'}
               </Button>
+
+              {error && (
+                <Typography sx={{ color: '#f87171', fontSize: '14px', mt: 1, pl: '20px' }}>
+                  {error}
+                </Typography>
+              )}
             </Box>
           )}
         </Box>

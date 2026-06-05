@@ -174,7 +174,7 @@ export default function Scene5CTA({ unlocked }: { unlocked: boolean }) {
           <Button
             variant="contained"
             disableElevation
-            href="#"
+            href="https://selar.com/e507813588"
             sx={{
               background: 'linear-gradient(135deg, #6d28d9, #a855f7)',
               color: '#fff',
@@ -208,7 +208,7 @@ export default function Scene5CTA({ unlocked }: { unlocked: boolean }) {
               transition: 'all 0.2s',
             }}
           >
-            🇳🇬 Get the E-Book
+            Get the E-Book 🇳🇬 
           </Button>
         </Box>
       </Box>

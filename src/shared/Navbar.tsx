@@ -79,18 +79,18 @@ export default function Navbar() {
             </Link>
           ))} */}
 
-          {/* <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.97 }} style={{ display: 'flex' }}>
+          <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.97 }} style={{ display: 'flex' }}>
             <Button
               variant="contained"
               disableElevation
+              href="/books/alex-data-twin?buy=1"
               sx={{
-                display: { xs: 'none', md: 'flex' },
                 backgroundColor: '#F97316',
                 color: '#ffffff',
                 fontFamily: 'var(--font-nunito)',
                 fontWeight: 700,
-                fontSize: '0.85rem',
-                px: 2.5,
+                fontSize: { xs: '0.78rem', md: '0.85rem' },
+                px: { xs: 2, md: 2.5 },
                 py: 0.9,
                 borderRadius: '50px',
                 boxShadow: '0 0 16px rgba(249,115,22,0.35)',
@@ -102,7 +102,7 @@ export default function Navbar() {
             >
               Get the Book
             </Button>
-          </motion.div> */}
+          </motion.div>
         {/* </Box> */}
       </Toolbar>
     </AppBar>

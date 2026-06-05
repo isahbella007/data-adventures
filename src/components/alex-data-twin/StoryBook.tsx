@@ -91,6 +91,18 @@ export default function StoryBook() {
       };
       gsap.to(strip, { x: () => -(window.innerWidth * (SCENES - 1)), ease: 'none', scrollTrigger: stConfig });
       stRef.current = ScrollTrigger.getAll().at(-1) ?? null;
+
+      // Jump straight to CTA when arriving via "Get the Book" button
+      if (new URLSearchParams(window.location.search).get('buy') === '1') {
+        curtainFiredRef.current = true;
+        isMirrorActiveRef.current = true;
+        setIsMirrorActive(true);
+        setGameComplete(true);
+        setTimeout(() => {
+          const st = stRef.current;
+          if (st) window.scrollTo({ top: st.end });
+        }, 80);
+      }
     }, container);
 
     return () => {
