@@ -6,7 +6,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import gsap from 'gsap';
 
-const TAGS = ['Author', 'AI Champion', 'Speaker', 'Data Literacy', 'CDO', 'CTO', 'CAIO'];
+const TAGS = ['Author', 'AI Champion', 'Speaker', 'Data Literacy', 'CDO'];
 
 const TOPICS = ['Board Readiness', 'AI Governance', 'AI Literacy', 'Transformation Strategy'];
 
