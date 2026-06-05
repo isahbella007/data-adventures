@@ -174,7 +174,7 @@ export default function Scene5CTA({ unlocked }: { unlocked: boolean }) {
           <Button
             variant="contained"
             disableElevation
-            href="https://selar.com/e507813588"
+            href="https://selar.com/alexandthedatatwin"
             sx={{
               background: 'linear-gradient(135deg, #6d28d9, #a855f7)',
               color: '#fff',
@@ -193,7 +193,7 @@ export default function Scene5CTA({ unlocked }: { unlocked: boolean }) {
           </Button>
           <Button
             variant="outlined"
-            href="https://selar.com/e507813588"
+            href="https://selar.com/alexandthedatatwin"
             sx={{
               background: 'rgba(255,255,255,0.05)',
               color: '#fff',
@@ -208,7 +208,7 @@ export default function Scene5CTA({ unlocked }: { unlocked: boolean }) {
               transition: 'all 0.2s',
             }}
           >
-            🇳🇬 Get the E-Book on Selar
+            🚀 Get the E-Book on Selar
           </Button>
         </Box>
       </Box>
