@@ -560,7 +560,7 @@ export default function HomePage() {
                   '&:hover': { backgroundColor: '#0284c7' },
   }}
 >
-  {loading ? 'Joining...' : 'Join Club 🚀'}
+  {loading ? 'Joining...' : 'Join the Data Unicorn Club 🦄'}
               </Button>
 
               {error && (
