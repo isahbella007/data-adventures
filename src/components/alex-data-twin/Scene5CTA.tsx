@@ -174,7 +174,7 @@ export default function Scene5CTA({ unlocked }: { unlocked: boolean }) {
           <Button
             variant="contained"
             disableElevation
-            href="https://selar.com/alexandthedatatwin"
+            href="https://www.amazon.com/dp/B0H4D33D4S"
             sx={{
               background: 'linear-gradient(135deg, #6d28d9, #a855f7)',
               color: '#fff',
