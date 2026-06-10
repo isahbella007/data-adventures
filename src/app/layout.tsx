@@ -41,8 +41,24 @@ const syne = Syne({
 });
 
 export const metadata: Metadata = {
-  title: 'Data World Adventures',
+  title: { 
+    default: 'Data World Adventures | Tech, Data & Automation, For Children', 
+    template: '%s | Data World Adventures'
+  },
   description: 'Storybook adventures that make data fun for kids.',
+  metadataBase: new URL('https://dataworldadventures.com'), 
+  alternates: { 
+    canonical: '/', 
+  }, 
+  openGraph: {
+    title: 'Data World Adventures',
+    description: 'Storybook adventures that make data fun for kids.',
+    url: 'https://dataworldaddventures.com', 
+    siteName: 'Data World Adventures',
+    locale: 'en_US', 
+    type: 'website'
+    
+  }
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
