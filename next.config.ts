@@ -23,7 +23,7 @@ const nextConfig: NextConfig = {
   async redirects() {
     return [
       // Only one book so far, so send /books straight to it on Amazon
-      { source: '/books', destination: 'https://www.amazon.com/dp/B0H4D33D4S', permanent: false },
+      { source: '/books', destination: 'https://www.amazon.com/dp/9786877802', permanent: false },
       { source: '/creators', destination: '/creators/shirley', permanent: false },
     ];
   },

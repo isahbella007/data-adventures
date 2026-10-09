@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react';
 import { AppBar, Toolbar, Box, Typography, Button } from '@mui/material';
 import Link from 'next/link';
+import Image from 'next/image';
 import { motion } from 'framer-motion';
 import { usePathname } from 'next/navigation';
 
@@ -43,7 +44,15 @@ export default function Navbar() {
         }}
       >
         {/* Brand */}
-        <Link href="/" style={{ display: 'flex', alignItems: 'center', minHeight: 44 }}>
+        <Link href="/" style={{ display: 'flex', alignItems: 'center', gap: 10, minHeight: 44 }}>
+          <Image
+            src="/images/logo-small.png"
+            alt=""
+            width={36}
+            height={36}
+            priority
+            style={{ borderRadius: 10 }}
+          />
           <Typography
             sx={{
               fontFamily: 'var(--font-nunito)',
