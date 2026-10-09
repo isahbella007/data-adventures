@@ -43,7 +43,7 @@ export default function Navbar() {
         }}
       >
         {/* Brand */}
-        <Link href="/">
+        <Link href="/" style={{ display: 'flex', alignItems: 'center', minHeight: 44 }}>
           <Typography
             sx={{
               fontFamily: 'var(--font-nunito)',
@@ -93,6 +93,7 @@ export default function Navbar() {
                 fontSize: { xs: '0.78rem', md: '0.85rem' },
                 px: { xs: 2, md: 2.5 },
                 py: 0.9,
+                minHeight: 44,
                 borderRadius: '50px',
                 boxShadow: '0 0 16px rgba(249,115,22,0.35)',
                 '&:hover': {

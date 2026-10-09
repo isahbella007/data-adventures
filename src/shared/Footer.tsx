@@ -116,8 +116,8 @@ export default function Footer() {
           © {new Date().getFullYear()} Data World Adventures. All rights reserved.
         </Typography>
         <Box sx={{ display: 'flex', gap: 3, fontFamily: 'var(--font-dm-sans)', fontSize: '0.78rem' }}>
-          <Link href="/privacy" style={{ color: 'rgba(255,255,255,0.4)' }}>Privacy Policy</Link>
-          <Link href="/impressum" style={{ color: 'rgba(255,255,255,0.4)' }}>Impressum</Link>
+          <Link href="/privacy" style={{ color: 'rgba(255,255,255,0.4)', padding: '12px 4px' }}>Privacy Policy</Link>
+          <Link href="/impressum" style={{ color: 'rgba(255,255,255,0.4)', padding: '12px 4px' }}>Impressum</Link>
         </Box>
         <Typography
           sx={{

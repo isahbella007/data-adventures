@@ -42,14 +42,14 @@ const syne = Syne({
 
 export const metadata: Metadata = {
   title: { 
-    default: 'Data World Adventures | Tech, Data & Automation, For Children', 
+    default: 'Data World Adventures | Storybooks for kids growing up in a world of data', 
     template: '%s | Data World Adventures'
   },
-  description: 'Storybook adventures that make data fun for kids.',
+  description: 'Picture-book adventures that help children understand the data all around them, so they grow up curious, confident and safe in a world made of data.',
   metadataBase: new URL('https://dataworldadventures.com'),
   openGraph: {
     title: 'Data World Adventures',
-    description: 'Storybook adventures that make data fun for kids.',
+    description: 'Picture-book adventures that help children understand the data all around them, so they grow up curious, confident and safe in a world made of data.',
     siteName: 'Data World Adventures',
     locale: 'en_US', 
     type: 'website'
