@@ -4,6 +4,9 @@ import HomeClient from './HomeClient';
 export const metadata: Metadata = {
   title: 'Data World Adventures',
   description: 'Storybook adventures that make data fun for kids.',
+  alternates: {
+    canonical: '/',
+  },
   openGraph: {
     title: 'Data World Adventures',
     description: 'Storybook adventures that make data fun for kids.',

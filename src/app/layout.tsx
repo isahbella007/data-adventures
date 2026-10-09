@@ -46,14 +46,10 @@ export const metadata: Metadata = {
     template: '%s | Data World Adventures'
   },
   description: 'Storybook adventures that make data fun for kids.',
-  metadataBase: new URL('https://dataworldadventures.com'), 
-  alternates: { 
-    canonical: '/', 
-  }, 
+  metadataBase: new URL('https://dataworldadventures.com'),
   openGraph: {
     title: 'Data World Adventures',
     description: 'Storybook adventures that make data fun for kids.',
-    url: 'https://dataworldaddventures.com', 
     siteName: 'Data World Adventures',
     locale: 'en_US', 
     type: 'website'

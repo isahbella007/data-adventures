@@ -539,6 +539,18 @@ export default function HomeClient() {
               )}
             </Box>
           )}
+
+          {!submitted && (
+            <Typography sx={{ fontFamily: 'var(--font-dm-sans)', color: '#6b7280', fontSize: '13px', mt: '16px', lineHeight: 1.6 }}>
+              By signing up you agree that we may email you about new books. Unsubscribe anytime.{' '}
+              <Link href="/privacy" style={{ color: '#9ca3af', textDecoration: 'underline' }}>Privacy Policy</Link>
+            </Typography>
+          )}
+
+          <Box sx={{ display: 'flex', justifyContent: 'center', gap: '24px', mt: '40px', fontFamily: 'var(--font-dm-sans)', fontSize: '13px' }}>
+            <Link href="/privacy" style={{ color: '#6b7280' }}>Privacy Policy</Link>
+            <Link href="/impressum" style={{ color: '#6b7280' }}>Impressum</Link>
+          </Box>
         </Box>
       </Box>
 
