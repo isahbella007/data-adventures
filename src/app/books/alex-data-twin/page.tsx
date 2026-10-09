@@ -11,7 +11,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'Alex and the Data Twin | Data Adventures',
     url: 'https://dataworldadventures.com/books/alex-data-twin', 
-    images: [{ url: '/images/og-alex-data-twin.jpg', width: 1200, height: 900, alt: 'Alex and the Data Twin: Alex at the kitchen table with his tablet' }],
+    images: [{ url: '/images/og-alex-data-twin.jpg', width: 1200, height: 900, alt: 'Alex and the Data Twin: Alex at the kitchen table with his mum\'s tablet' }],
     siteName: 'Data World Adventures',
     locale: 'en_US', 
     type: 'website'
