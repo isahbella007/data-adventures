@@ -55,8 +55,8 @@ export default function PrivacyPage() {
 
       <h2>Buying the book</h2>
       <p>
-        The &ldquo;Get the Book&rdquo; buttons link to Amazon and Selar. If you follow them, those shops&apos;
-        own privacy policies apply. We do not receive your payment details.
+        The &ldquo;Get the Book&rdquo; buttons link to Amazon. If you follow them, Amazon&apos;s own privacy
+        policy applies. We do not receive your payment details.
       </p>
 
       <h2>Your rights</h2>

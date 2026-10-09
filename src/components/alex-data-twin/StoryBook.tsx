@@ -3,6 +3,7 @@
 import { useRef, useEffect, useState, useCallback } from 'react';
 import { Box } from '@mui/material';
 import { useRouter } from 'next/navigation';
+import Image from 'next/image';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import Scene1Kitchen from './Scene1Kitchen';
@@ -233,8 +234,9 @@ export default function StoryBook() {
           fontFamily: 'var(--font-nunito)',
           fontWeight: 700,
           fontSize: '14px',
-          px: '16px',
-          py: '10px',
+          pl: '8px',
+          pr: '16px',
+          py: '6px',
           borderRadius: '30px',
           cursor: 'pointer',
           transition: 'background-color 0.2s, transform 0.2s',
@@ -244,6 +246,7 @@ export default function StoryBook() {
           },
         }}
       >
+        <Image src="/images/logo-small.png" alt="" width={32} height={32} style={{ borderRadius: 8 }} />
         ← Home
       </Box>
 

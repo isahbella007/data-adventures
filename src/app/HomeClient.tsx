@@ -211,10 +211,10 @@ export default function HomeClient() {
                 maxWidth: 500,
               }}
             >
-              What happens when Mum uploads Teddy's picture online without asking? Join Alex as he steps through his tablet screen into a magical, glowing blue data world to track down the sneaky Data Pirates!
+              What happens when Mum uploads Teddy's picture online without asking? Join Alex as he steps through Mum's tablet screen into a magical, glowing blue data world to track down the sneaky Data Pirates!
             </Typography>
 
-            <Link href="/books/alex-data-twin" style={{ textDecoration: 'none' }}>
+            <Link href="/books/alex-data-twin" style={{ textDecoration: 'none', display: 'inline-block' }}>
               <Button
                 disableElevation
                 sx={{
@@ -334,7 +334,7 @@ export default function HomeClient() {
             The Adventure Series
           </Typography>
           <Typography sx={{ fontFamily: 'var(--font-dm-sans)', fontSize: '16px', color: '#6b7280' }}>
-            Explore our growing library of whimsical stories transforming complex tech ideas into friendly watercolor fairy tales.
+            Explore our growing library of whimsical stories transforming complex tech ideas into friendly watercolour fairy tales.
           </Typography>
         </Box>
 
@@ -476,11 +476,18 @@ export default function HomeClient() {
         sx={{ backgroundColor: '#111827', color: '#fff', py: { xs: '60px', md: '80px' }, px: { xs: 3, md: '40px' }, textAlign: 'center' }}
       >
         <Box sx={{ maxWidth: 500, mx: 'auto' }}>
+          <Image
+            src="/images/logo-small.png"
+            alt="Data World Adventures teddy bear"
+            width={96}
+            height={96}
+            style={{ borderRadius: 20, margin: '0 auto 20px', display: 'block' }}
+          />
           <Typography sx={{ fontFamily: 'var(--font-nunito)', fontWeight: 900, fontSize: { xs: '26px', md: '32px' }, mb: '12px' }}>
             Join the Privacy Radar
           </Typography>
           <Typography sx={{ fontFamily: 'var(--font-dm-sans)', color: '#9ca3af', mb: '24px', lineHeight: 1.6 }}>
-            Be the first to know when Alex's next adventure loads or when free printable coloring books hit the network pages!
+            Be the first to know when Alex's next adventure loads or when free printable colouring books hit the network pages!
           </Typography>
 
           {submitted ? (
@@ -548,8 +555,8 @@ export default function HomeClient() {
           )}
 
           <Box sx={{ display: 'flex', justifyContent: 'center', gap: '24px', mt: '40px', fontFamily: 'var(--font-dm-sans)', fontSize: '13px' }}>
-            <Link href="/privacy" style={{ color: '#6b7280' }}>Privacy Policy</Link>
-            <Link href="/impressum" style={{ color: '#6b7280' }}>Impressum</Link>
+            <Link href="/privacy" style={{ color: '#6b7280', padding: '12px 4px' }}>Privacy Policy</Link>
+            <Link href="/impressum" style={{ color: '#6b7280', padding: '12px 4px' }}>Impressum</Link>
           </Box>
         </Box>
       </Box>
