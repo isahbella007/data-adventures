@@ -191,25 +191,6 @@ export default function Scene5CTA({ unlocked }: { unlocked: boolean }) {
           >
             🚀 Get the Book on Amazon
           </Button>
-          <Button
-            variant="outlined"
-            href="https://selar.com/alexandthedatatwin"
-            sx={{
-              background: 'rgba(255,255,255,0.05)',
-              color: '#fff',
-              fontFamily: 'var(--font-nunito)',
-              fontSize: '16px',
-              fontWeight: 700,
-              px: '36px',
-              py: '14px',
-              borderRadius: '30px',
-              border: '1px solid rgba(255,255,255,0.15)',
-              '&:hover': { background: 'rgba(255,255,255,0.1)', borderColor: 'rgba(255,255,255,0.3)' },
-              transition: 'all 0.2s',
-            }}
-          >
-            🚀 Get the E-Book on Selar
-          </Button>
         </Box>
       </Box>
     </Box>
