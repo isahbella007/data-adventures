@@ -6,7 +6,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import gsap from 'gsap';
 
-const TAGS = ['Author', 'AI Champion', 'Speaker', 'Data Literacy', 'CDO'];
+const TAGS = ['Author', 'AI Champion', 'Speaker', 'Data Literacy', 'AI Advisor'];
 
 const TOPICS = ['Board Readiness', 'AI Governance', 'AI Literacy', 'Transformation Strategy'];
 
@@ -106,7 +106,7 @@ export default function ShirleyClient() {
                   textTransform: 'uppercase',
                 }}
               >
-                Chief Digital Officer & Author
+                Executive AI Advisor & Author
               </Typography>
             </Box>
 
@@ -491,7 +491,7 @@ export default function ShirleyClient() {
                 Shirley Werchota
               </Typography>
               <Typography sx={{ fontFamily: 'var(--font-inter)', fontSize: '12px', color: 'rgba(167,139,250,0.7)', letterSpacing: '1.5px', textTransform: 'uppercase', mt: '4px' }}>
-                CDO & Author
+                AI Advisor & Author
               </Typography>
             </Box>
           </Box>
@@ -516,7 +516,7 @@ export default function ShirleyClient() {
             <Typography
               sx={{ fontFamily: 'var(--font-inter)', fontSize: '16px', lineHeight: 1.75, color: 'rgba(255,255,255,0.6)', mb: '18px' }}
             >
-              Shirley Werchota is a trilingual technology executive and Chief Digital Officer whose career spans Orange Business, Raiffeisen Bank International, and Accenture. She builds digital and AI functions from the ground up, having delivered enterprise data pipelines, cloud-first compliant infrastructure, and company-wide digital capability programmes across globally distributed operations.
+              Shirley Werchota is a trilingual executive AI advisor whose career spans Orange Business, Raiffeisen Bank International, and Accenture. She builds digital and AI functions from the ground up, having delivered enterprise data pipelines, cloud-first compliant infrastructure, and company-wide digital capability programmes across globally distributed operations.
             </Typography>
             <Typography
               sx={{ fontFamily: 'var(--font-inter)', fontSize: '16px', lineHeight: 1.75, color: 'rgba(255,255,255,0.6)', mb: '36px' }}

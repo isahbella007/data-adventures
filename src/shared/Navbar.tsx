@@ -49,7 +49,8 @@ export default function Navbar() {
               fontFamily: 'var(--font-nunito)',
               fontWeight: 900,
               fontSize: { xs: '1rem', md: '1.15rem' },
-              color: '#ffffff',
+              color: pathname === '/' && !scrolled ? '#1c0a00' : '#ffffff',
+              transition: 'color 0.35s ease',
               letterSpacing: '-0.01em',
             }}
           >
