@@ -48,10 +48,10 @@ export default function Navbar() {
           <Image
             src="/images/logo-small.png"
             alt=""
-            width={36}
-            height={36}
+            width={48}
+            height={48}
             priority
-            style={{ borderRadius: 10 }}
+            style={{ borderRadius: 12 }}
           />
           <Typography
             sx={{

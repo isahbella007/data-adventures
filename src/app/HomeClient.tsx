@@ -476,6 +476,13 @@ export default function HomeClient() {
         sx={{ backgroundColor: '#111827', color: '#fff', py: { xs: '60px', md: '80px' }, px: { xs: 3, md: '40px' }, textAlign: 'center' }}
       >
         <Box sx={{ maxWidth: 500, mx: 'auto' }}>
+          <Image
+            src="/images/logo-small.png"
+            alt="Data World Adventures teddy bear"
+            width={96}
+            height={96}
+            style={{ borderRadius: 20, margin: '0 auto 20px', display: 'block' }}
+          />
           <Typography sx={{ fontFamily: 'var(--font-nunito)', fontWeight: 900, fontSize: { xs: '26px', md: '32px' }, mb: '12px' }}>
             Join the Privacy Radar
           </Typography>

@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
+import Image from 'next/image';
 
 export const metadata: Metadata = {
   title: 'Page not found',
@@ -17,6 +18,13 @@ export default function NotFound() {
         fontFamily: 'var(--font-dm-sans)',
       }}
     >
+      <Image
+        src="/images/logo-small.png"
+        alt="Data World Adventures teddy bear"
+        width={120}
+        height={120}
+        style={{ borderRadius: 24, margin: '0 auto 24px', display: 'block' }}
+      />
       <h1
         style={{
           fontFamily: 'var(--font-nunito)',
