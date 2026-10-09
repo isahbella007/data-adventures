@@ -11,7 +11,7 @@ export const CREATORS: Creator[] = [
   {
     role: 'Author & Founder',
     name: 'Shirley Werchota',
-    bio: 'Born in Tunisia to an Austrian father and Zimbabwean mother, Shirley has lived across two continents in six countries. A former painter turned data & security strategist, she built this series to give children the digital literacy toolkit the world forgot to build.',
+    bio: 'Born in Tunisia to an Austrian father and Zimbabwean mother, Shirley has lived across two continents in six countries. A former painter turned executive AI advisor, she built this series to give children the digital literacy toolkit the world forgot to build.',
     image: '/images/creators/shirley.jpg',
     fallbackEmoji: '✍️',
     href: '/creators/shirley',

@@ -37,9 +37,6 @@ export default function ImpressumPage() {
       <h2>Business purpose</h2>
       <p>{LEGAL.businessPurpose}</p>
 
-      <h2>VAT ID</h2>
-      <p>{LEGAL.vatId}</p>
-
       <h2>Editorial policy</h2>
       <p>
         Information about the Data World Adventures book series and its creators, and about children&apos;s

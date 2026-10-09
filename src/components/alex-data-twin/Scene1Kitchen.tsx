@@ -46,6 +46,7 @@ export default function Scene1Kitchen({ sx }: Scene1KitchenProps) {
       >
         <Box sx={{ maxWidth: 600, mx: 'auto', textAlign: 'center', mb: '8px' }}>
           <Typography
+            component="h1"
             sx={{
               fontFamily: 'var(--font-nunito)',
               fontSize: 'clamp(32px, 5vw, 54px)',
