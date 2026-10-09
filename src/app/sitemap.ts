@@ -12,18 +12,6 @@ export default function sitemap(): MetadataRoute.Sitemap{
             priority: 1 
         },
         { 
-            url: `${baseUrl}/books`,
-            lastModified: new Date(), 
-            changeFrequency: 'monthly', 
-            priority: 0.8 
-        },
-        { 
-            url: `${baseUrl}/creators`,
-            lastModified: new Date(), 
-            changeFrequency: 'monthly', 
-            priority: 0.8 
-        },
-        { 
             url: `${baseUrl}/creators/shirley`,
             lastModified: new Date(), 
             changeFrequency: 'monthly', 
@@ -34,6 +22,18 @@ export default function sitemap(): MetadataRoute.Sitemap{
             lastModified: new Date(), 
             changeFrequency: 'monthly', 
             priority: 0.8 
+        },
+        { 
+            url: `${baseUrl}/privacy`,
+            lastModified: new Date(), 
+            changeFrequency: 'yearly', 
+            priority: 0.3 
+        },
+        { 
+            url: `${baseUrl}/impressum`,
+            lastModified: new Date(), 
+            changeFrequency: 'yearly', 
+            priority: 0.3 
         },
     ]
 }

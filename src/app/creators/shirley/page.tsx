@@ -4,6 +4,9 @@ import ShirleyClient from './ShirleyClient';
 export const metadata: Metadata = {
   title: 'Shirley Werchota',
   description: 'Shirley Werchota is a Chief Digital Officer and author who bridges the gap between boardrooms and storybooks, making data fun for kids.',
+  alternates: {
+    canonical: '/creators/shirley',
+  },
   openGraph: {
     title: 'Shirley Werchota',
     description: 'Shirley Werchota is a Chief Digital Officer and author who bridges the gap between boardrooms and storybooks, making data fun for kids.',

@@ -10,3 +10,21 @@ html {
 html::-webkit-scrollbar {
   display: none;               /* Chrome/Safari */
 }
+
+/* Impressum and privacy pages */
+.legal-page h2 {
+  font-family: var(--font-nunito);
+  font-weight: 800;
+  font-size: 1.25rem;
+  color: #ffffff;
+  margin: 32px 0 8px;
+}
+
+.legal-page p {
+  margin: 0 0 12px;
+}
+
+.legal-page a {
+  color: #7DD3FC;
+  text-decoration: underline;
+}
